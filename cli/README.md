@@ -38,10 +38,10 @@ PENTEST_PHASE="shell_only"
 
 ## Installation & Running
 
-From the `mcp-client` directory:
+From the `ADPilot` directory:
 
 ```bash
-cd /home/diogo/Coding/temp/mcp-client
+cd cli
 
 # Sync dependencies (installed automatically via uv)
 uv sync

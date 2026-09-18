@@ -5,8 +5,7 @@ from typing import Any
 
 from dotenv import find_dotenv, load_dotenv
 from rich.prompt import Confirm, Prompt
-from util.config import get_settings
-from util.mcp_session import mcp_tool_session
+from adpilot_agent.util import get_settings, mcp_tool_session
 
 # Ensure local .env or current working directory .env is loaded
 load_dotenv(find_dotenv(usecwd=True))

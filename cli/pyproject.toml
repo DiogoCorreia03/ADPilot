@@ -9,7 +9,7 @@ description = "Interactive CLI client for MCP Server tools"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "mcp-host",
+    "adpilot-agent",
     "rich>=13.0.0",
     "prompt-toolkit>=3.0.0",
 ]
@@ -28,4 +28,4 @@ pythonpath = ["src"]
 asyncio_mode = "auto"
 
 [tool.uv.sources]
-mcp-host = { path = "../mcp-host", editable = true }
+adpilot-agent = { path = "../adpilot-agent", editable = true }

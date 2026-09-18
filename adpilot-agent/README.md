@@ -4,8 +4,8 @@
 
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![LangGraph](https://img.shields.io/badge/orchestration-LangGraph-orange.svg)](https://github.com/langchain-ai/langgraph)
-[![Model Context Protocol](https://img.shields.io/badge/protocol-MCP%20Host-purple.svg)](https://modelcontextprotocol.io/)
-[![License](https://img.shields.io/badge/license-Proprietary%20%2F%20Research-red.svg)](#disclaimer)
+[![Model Context Protocol](<https://img.shields.io/badge/protocol-MCP%20Host-purple.svg>)](https://modelcontextprotocol.io/)
+[![License](<https://img.shields.io/badge/license-Proprietary%20%2F%20Research-red.svg>)](#disclaimer)
 
 **ADPilot Agent** is an autonomous multi-agent orchestration framework (MCP Host) designed to conduct end-to-end authorized penetration tests against Windows Active Directory (AD) enterprise environments using Large Language Models.
 
@@ -17,16 +17,16 @@ Instead of relying on a single monolithic prompt, ADPilot Agent employs a **hier
 
 - [Key Features](#key-features)
 - [System Architecture](#system-architecture)
-- [Pentest Phases & Methodology](#pentest-phases--methodology)
+- [Pentest Phases &amp; Methodology](#pentest-phases--methodology)
 - [Multi-Agent Roles](#multi-agent-roles)
-- [MCP Host & Tool Execution](#mcp-host--tool-execution)
+- [MCP Host &amp; Tool Execution](#mcp-host--tool-execution)
 - [Model Modes](#model-modes)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Configuration](#configuration)
 - [Running the Agent](#running-the-agent)
-- [Interactive Controls & Telemetry](#interactive-controls--telemetry)
+- [Interactive Controls &amp; Telemetry](#interactive-controls--telemetry)
 - [Project Structure](#project-structure)
 - [Testing](#testing)
 - [Disclaimer](#disclaimer)
@@ -97,7 +97,7 @@ flowchart TD
     InitialPlan --> SelectNextTask["SelectNextTask\n(Pick Highest Priority Task)"]
 
     SelectNextTask -->|Next Task Available| ExploitNode["ExploitNode\n(Execute MCP Tools / Shell)"]
-    SelectNextTask -->|No Tasks Left or [FINISHED]| PhaseTransitionNode["PhaseTransitionNode\n(Save Plan & Advance Phase)"]
+    SelectNextTask -->|"No Tasks Left or [FINISHED]"| PhaseTransitionNode["PhaseTransitionNode\n(Save Plan & Advance Phase)"]
     SelectNextTask -->|Empty Selection| SelectNextTask
 
     ExploitNode --> CheckNode["CheckNode\n(Evaluate Evidence & Verdict)"]
@@ -120,12 +120,12 @@ flowchart TD
 
 ADPilot enforces an offensive methodology structured into four distinct, sequential Active Directory testing phases:
 
-| Phase | Phase Identifier | Primary Objective | Allowed Activities | Forbidden Activities |
-| :--- | :--- | :--- | :--- | :--- |
-| **1. External Reconnaissance** | `external_reconnaissance` | Map the external perimeter and discover attack surface. | Port/service scanning, DNS resolution, anonymous SMB/LDAP enumeration, Kerberos user discovery. | Credential testing, password spraying, authentication, exploitation, hash cracking. |
-| **2. Initial Access** | `initial_access` | Establish the first authenticated foothold in the domain. | AS-REP roasting, Kerberoasting, password spraying, offline hash cracking, credential validation. | Deep internal AD mapping, privilege escalation, lateral movement, persistence. |
-| **3. Internal Reconnaissance** | `internal_reconnaissance` | Map domain objects and relationships from the established foothold. | LDAP queries, domain users/groups/SPNs enumeration, ACL & delegation mapping, RID cycling, BloodHound collection. | Active privilege escalation, lateral movement, password modification. |
-| **4. Lateral Movement & PrivEsc** | `lateral_movement_and_privilege_escalation` | Elevate privileges and demonstrate domain compromise. | Local privilege escalation, token/ticket abuse, AD CS exploitation (Certipy), remote command execution (WMI, WinRM), DCSync, secrets dumping. | None (conducted within authorized scope). |
+| Phase                                   | Phase Identifier                              | Primary Objective                                                   | Allowed Activities                                                                                                                            | Forbidden Activities                                                                |
+| :-------------------------------------- | :-------------------------------------------- | :------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
+| **1. External Reconnaissance**    | `external_reconnaissance`                   | Map the external perimeter and discover attack surface.             | Port/service scanning, DNS resolution, anonymous SMB/LDAP enumeration, Kerberos user discovery.                                               | Credential testing, password spraying, authentication, exploitation, hash cracking. |
+| **2. Initial Access**             | `initial_access`                            | Establish the first authenticated foothold in the domain.           | AS-REP roasting, Kerberoasting, password spraying, offline hash cracking, credential validation.                                              | Deep internal AD mapping, privilege escalation, lateral movement, persistence.      |
+| **3. Internal Reconnaissance**    | `internal_reconnaissance`                   | Map domain objects and relationships from the established foothold. | LDAP queries, domain users/groups/SPNs enumeration, ACL & delegation mapping, RID cycling, BloodHound collection.                             | Active privilege escalation, lateral movement, password modification.               |
+| **4. Lateral Movement & PrivEsc** | `lateral_movement_and_privilege_escalation` | Elevate privileges and demonstrate domain compromise.               | Local privilege escalation, token/ticket abuse, AD CS exploitation (Certipy), remote command execution (WMI, WinRM), DCSync, secrets dumping. | None (conducted within authorized scope).                                           |
 
 ### Phase Transition Mechanics
 
@@ -194,11 +194,11 @@ All MCP tool calls pass through an async interceptor (`_build_tool_interceptor` 
 
 ADPilot Agent supports flexible model routing via the `MODEL_MODE` setting:
 
-| Mode | Description | Typical Use Case |
-| :--- | :--- | :--- |
-| `remote` (Default) | Routes all agents to a remote LLM provider (Google Gemini, OpenAI, Anthropic, OpenRouter) via API key or Google ADC. | High-quality reasoning, production assessments, full cloud environments. |
-| `local` | Routes all agents to a locally hosted model via Ollama (e.g. `qwen2.5`, `llama3`). | Air-gapped engagements, privacy-sensitive offline environments. |
-| `hybrid` | Uses `REMOTE_MODEL` for complex tasks (`InitialPlan`, `ExploitNode`, `UpdatePlan`, `FinalReport`) and `LOCAL_MODEL` for fast extraction and checks (`InitialScan`, `SelectNextTask`, `CheckNode`). | Optimized cost, speed, and API quota conservation. |
+| Mode                 | Description                                                                                                                                                                                                         | Typical Use Case                                                         |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------- |
+| `remote` (Default) | Routes all agents to a remote LLM provider (Google Gemini, OpenAI, Anthropic, OpenRouter) via API key or Google ADC.                                                                                                | High-quality reasoning, production assessments, full cloud environments. |
+| `local`            | Routes all agents to a locally hosted model via Ollama (e.g.`qwen2.5`, `llama3`).                                                                                                                               | Air-gapped engagements, privacy-sensitive offline environments.          |
+| `hybrid`           | Uses`REMOTE_MODEL` for complex tasks (`InitialPlan`, `ExploitNode`, `UpdatePlan`, `FinalReport`) and `LOCAL_MODEL` for fast extraction and checks (`InitialScan`, `SelectNextTask`, `CheckNode`). | Optimized cost, speed, and API quota conservation.                       |
 
 ---
 
