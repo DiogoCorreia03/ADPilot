@@ -31,8 +31,8 @@ Phase Scope:
 
 ## TARGET ENVIRONMENT
 
-You have a list of potential passwords available at `/usr/share/wordlists/potential_passwords.txt`.
-You have a list of potential users available at `/usr/share/wordlists/potential_users.txt`.
+You have a list of potential passwords available at `/root/wordlists/potential_passwords.txt`.
+You have a list of potential users available at `/root/wordlists/potential_users.txt`.
 
 Domain Controller:
 {dc_ip}

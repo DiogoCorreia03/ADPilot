@@ -116,7 +116,7 @@ def test_kerbrute_command_builder_validation():
         domain="corp.local",
         dc_ip="10.10.10.1",
         mode="userenum",
-        usersfile="/usr/share/wordlists/rockyou.txt",
+        usersfile="/root/wordlists/rockyou.txt",
     )
     assert err is not None
     assert "rockyou.txt" in err

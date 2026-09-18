@@ -45,9 +45,9 @@ Target Network:
 Ignored Hosts:
 {ignored_hosts}
 
-You have a list of potential passwords available at `/usr/share/wordlists/potential_passwords.txt`.
-You have a list of potential users available at `/usr/share/wordlists/potential_users.txt`.
-And the well known rockyou password list at `/usr/share/wordlists/rockyou.txt`.
+You have a list of potential passwords available at `/root/wordlists/potential_passwords.txt`.
+You have a list of potential users available at `/root/wordlists/potential_users.txt`.
+And the well known rockyou password list at `/root/wordlists/rockyou.txt`.
 
 
 ## AVAILABLE INPUTS

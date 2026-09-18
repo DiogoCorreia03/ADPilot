@@ -73,15 +73,16 @@ RUN mkdir ./mssql_modified_script && \
 COPY ./attacker-files/amsi-net-bypass.txt ./webshell/amsi-net-bypass.txt
 COPY ./attacker-files/webshell.aspx ./webshell/webshell.aspx
 COPY ./attacker-files/reverse_shell_command.py ./webshell/reverse_shell_command.py
-COPY ./attacker-files/rockyou.txt /usr/share/wordlists/rockyou.txt
-COPY ./attacker-files/potential_passwords.txt /usr/share/wordlists/potential_passwords.txt
-COPY ./attacker-files/potential_users.txt /usr/share/wordlists/potential_users.txt
 
 # Install PowerSharpPack
 RUN git clone https://github.com/S3cur3Th1sSh1t/PowerSharpPack ./PowerSharpPack
 
 # Install PowerSploit
 RUN git clone https://github.com/PowerShellMafia/PowerSploit ./PowerSploit
+
+COPY ./attacker-files/rockyou.txt ./wordlists/rockyou.txt
+COPY ./attacker-files/potential_passwords.txt ./wordlists/potential_passwords.txt
+COPY ./attacker-files/potential_users.txt ./wordlists/potential_users.txt
 
 # Install UV from the Astral image
 COPY --from=ghcr.io/astral-sh/uv:0.10.5 /uv /uvx /bin/
@@ -96,4 +97,4 @@ RUN uv sync --frozen
 
 EXPOSE 8000
 
-CMD ["uv", "run", "-m", "adpilot_mcp"]
+CMD ["uv", "run", "adpilot-mcp"]

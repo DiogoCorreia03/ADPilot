@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     host: str = Field(default="0.0.0.0", alias="HOST")
     port: int = Field(default=8000, alias="PORT")
     ad_state_dir: Path = Field(
-        default=Path("./ad-pentest/state"),
+        default=Path("/root/ad-pentest/state"),
         alias="AD_STATE_DIR",
     )
     agent_phase_header: str = Field(

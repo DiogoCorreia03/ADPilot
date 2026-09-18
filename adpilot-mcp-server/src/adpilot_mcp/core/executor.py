@@ -65,6 +65,7 @@ async def run_command_async(
     try:
         proc = await asyncio.create_subprocess_shell(
             cmd,
+            cwd="/root",
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
             env=env,
