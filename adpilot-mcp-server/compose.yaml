@@ -1,0 +1,23 @@
+services:
+  server:
+    build: .
+    image: diogocorreia03/wadpentesting-attackermachine-mcpserver:2.0.2
+    restart: unless-stopped
+    network_mode: "host"
+    privileged: true
+
+  ngrok:
+    image: ngrok/ngrok:3
+    restart: unless-stopped
+    network_mode: "host"
+    command:
+      - "http"
+      - "localhost:8000" # Points to the 'server' service above since it is using host networking
+      - "--url=${NGROK_DOMAIN}"
+      - "--traffic-policy-file=/etc/ngrok/traffic-policy.yml"
+    volumes:
+      - ./ngrok/traffic-policy.yml:/etc/ngrok/traffic-policy.yml:ro
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    depends_on:
+      - server

@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-client"
+version = "0.1.0"
+description = "Interactive CLI client for MCP Server tools"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp-host",
+    "rich>=13.0.0",
+    "prompt-toolkit>=3.0.0",
+]
+
+[project.scripts]
+mcp-cli = "mcp_client.app:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+
+[tool.uv.sources]
+mcp-host = { path = "../mcp-host", editable = true }
