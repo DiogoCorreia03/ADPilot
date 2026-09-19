@@ -154,6 +154,7 @@ def run_command(
             text=True,
             timeout=timeout,
             env=env,
+            check=False,
         )
         return CommandResult(
             command=cmd,
