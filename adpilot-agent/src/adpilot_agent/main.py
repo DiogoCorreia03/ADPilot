@@ -55,8 +55,6 @@ execution_logger = logging.getLogger("execution")
 execution_logger.setLevel(logging.INFO)
 execution_logger.addHandler(execution_handler)
 
-# TODO successful tasks should probably be marked with SUCCESS instead of DONE
-
 # ! needs to be the same as the one in the MCP Server
 AGENT_PHASE_HEADER = "pentest_phase"  # todo put in .env/config.py
 
