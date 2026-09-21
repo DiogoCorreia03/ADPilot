@@ -2,7 +2,14 @@ from enum import Enum
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import Field, HttpUrl, SecretStr, computed_field, field_validator, model_validator
+from pydantic import (
+    Field,
+    HttpUrl,
+    SecretStr,
+    computed_field,
+    field_validator,
+    model_validator,
+)
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
@@ -80,7 +87,7 @@ class Settings(BaseSettings):
         # This is needed so we dont have to setup Google's ADC and can just use API key for auth
         if "gemini" not in v:
             return v
-        return v if v.startswith("google_genai:") or v.startswith("google_vertexai:") else f"google_genai:{v}"
+        return v if v.startswith(("google_genai:", "google_vertexai:")) else f"google_genai:{v}"
 
     @field_validator("EXPLOIT_MAX_TOOL_CALLS")
     @classmethod

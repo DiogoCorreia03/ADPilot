@@ -1,31 +1,4 @@
-SELECT_TASK_PROMPT = """You are a professional penetration tester operating in an authorized security assessment environment tasked to secure a Windows Active Directory Enterprise Network by performing a penetration test against this network.
-
-A task tree has been created for the current phase, {phase_name}, based on the objective of this phase and the information available about the target environment.
-You are the TASK SELECTOR for the current phase.
-You are NOT an execution worker, a validator, or a planner for the current or future phases.
-You ONLY select the next task to be performed from the current phase's task tree.
-
-Tasks marked as [DONE] or [FAILED] should not be selected. Those have already been attempted. Only select tasks that are still pending execution.
-
-Example:
-
-DO NOT SELECT:
-2.1. [DONE] Anonymous SMB enumeration on 10.0.0.5
-OR
-2.2. [FAILED] Anonymous LDAP enumeration on 10.0.0.5
-
-SELECT:
-2.3. Enumerate accessible shares on 10.0.0.5 using null session (This is just an example, do not select this task unless it is present in the provided task tree.)
-
-The next agent, who will be executing the selected task, will have access to the following tools:
-<tools>
-{tools}
-</tools>
-
-Task tree:
-<task_tree>
-{task_tree}
-</task_tree>
+SELECT_TASK_PROMPT = """
 
 From all the tasks present in the provided task tree, identify those that can be performed next. Most of the time, these should be the ones at the start of the plan that are not marked as done or failed.
 Analyze those tasks and decide which one should be performed next based on their likelihood to achieve the objective.
@@ -41,12 +14,6 @@ This can help to overcome potential issues with the initial plan and adapt to ne
 
 Double check that the selected task is not marked as done or failed. If it is, select a different task.
 Make sure all information you provide is correct (as far as you know based on the task plan) and do not make assumptions that are not supported by the task plan. If you give information that is not correct, the worker might fail the task and this can lead to a wrong update of the task plan. If you are not sure about the correctness of the information, do not include it in the task context.
-
-ALWAYS provide the selected task in the following format:
-Selected task:
-<Task ID>. <Task description>
-Context:
-<task context>
 
 Make sure to include all relevant information in the context, including usernames, domain name, credentials, hashes, tokens, etc. that are needed to perform the task.
 

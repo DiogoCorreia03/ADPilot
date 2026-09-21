@@ -51,8 +51,6 @@ class HTTPClient(AsyncClient):
 def record_tool_result(
     result: Any,
     metrics: dict[str, Any] | None,
-    limit_scope_label: str,
-    phase_name: str | None = None,
 ) -> None:
     if metrics is None:
         return
@@ -80,8 +78,6 @@ def record_tool_result(
 
     record_tool_call(
         metrics,
-        phase=phase_name,
-        scope_label=limit_scope_label,
         is_error=is_error,
     )
 
@@ -117,38 +113,12 @@ def _format_tool_error(request: MCPToolCallRequest, error: Exception) -> ToolMes
     )
 
 
-def _format_tool_limit_reached(
-    request: MCPToolCallRequest,
-    *,
-    limit: int,
-    calls_used: int,
-    scope_label: str,
-) -> ToolMessage:
-    """Build an observation string for deterministic behavior when tool budget is exhausted."""
-    runtime = request.runtime
-    tool_call_id = (
-        getattr(runtime, "tool_call_id", None)
-        or getattr(request, "tool_call_id", None)
-        or "call_limit"
-    )
-    return ToolMessage(
-        "TOOL_CALL_LIMIT_REACHED\n"
-        f"scope: {scope_label}\n"
-        f"tool: {request.name}\n"
-        f"args: {request.args}\n"
-        f"tool_call_limit: {limit}\n"
-        f"tool_calls_used: {calls_used}\n"
-        "next_step: Stop tool usage and provide final response with evidence gathered so far.",
-        tool_call_id=tool_call_id,
-    )
 
 
-def _format_tool_consecutive_limit_reached(
+def format_tool_consecutive_limit_reached(
     request: MCPToolCallRequest,
     *,
     consecutive_limit: int,
-    current_consecutive_calls: int,
-    scope_label: str,
 ) -> ToolMessage:
     """Build an observation string when the same tool is called too many times in a row."""
     runtime = request.runtime
@@ -159,11 +129,9 @@ def _format_tool_consecutive_limit_reached(
     )
     return ToolMessage(
         "TOOL_CALL_CONSECUTIVE_LIMIT_REACHED\n"
-        f"scope: {scope_label}\n"
         f"tool: {request.name}\n"
         f"args: {request.args}\n"
         f"same_tool_streak_limit: {consecutive_limit}\n"
-        f"same_tool_streak_count: {current_consecutive_calls}\n"
         "next_step: Stop repeating this tool. Either finalize with gathered evidence or switch approach.",
         tool_call_id=tool_call_id,
     )
@@ -171,47 +139,18 @@ def _format_tool_consecutive_limit_reached(
 
 def _build_tool_interceptor(
     *,
-    tool_call_limit: int | None = None,
     same_tool_streak_limit: int | None = None,
-    limit_scope_label: str = "MCPToolSession",
-    phase: str | None = None,
     metrics: dict[str, Any] | None = None,
 ) -> Callable[..., Any]:
-    tool_calls_used = 0
     last_tool_name = ""
     same_tool_streak_count = 0
     lock = asyncio.Lock()
 
     async def _tool_interceptor(request: MCPToolCallRequest, handler):
         """Log tool calls before and after execution, optionally enforcing a per-session call limit."""
-        nonlocal tool_calls_used, last_tool_name, same_tool_streak_count
-        phase_name = phase
-        if phase_name is None and request.headers:
-            phase_name = request.headers.get("pentest_phase")
+        nonlocal last_tool_name, same_tool_streak_count
 
         async with lock:
-            if tool_call_limit is not None and tool_calls_used >= tool_call_limit:
-                execution_logger.info(
-                    "Tool call limit reached for %s (%s/%s). Blocking tool '%s'. Agent must provide final response with gathered evidence.",
-                    limit_scope_label,
-                    tool_calls_used,
-                    tool_call_limit,
-                    request.name,
-                )
-                if metrics is not None:
-                    record_tool_call(
-                        metrics,
-                        phase=phase_name,
-                        scope_label=limit_scope_label,
-                        is_error=True,
-                    )
-                return _format_tool_limit_reached(
-                    request,
-                    limit=tool_call_limit,
-                    calls_used=tool_calls_used,
-                    scope_label=limit_scope_label,
-                )
-
             prospective_streak = (
                 same_tool_streak_count + 1 if request.name == last_tool_name else 1
             )
@@ -220,8 +159,7 @@ def _build_tool_interceptor(
                 and prospective_streak > same_tool_streak_limit
             ):
                 execution_logger.info(
-                    "Consecutive tool call limit reached for %s using tool '%s' (%s/%s). Agent must switch to a different tool or finalize with gathered evidence.",
-                    limit_scope_label,
+                    "Consecutive tool call limit reached for tool '%s' (%s/%s). Agent must switch to a different tool or finalize with gathered evidence.",
                     request.name,
                     same_tool_streak_count,
                     same_tool_streak_limit,
@@ -229,28 +167,19 @@ def _build_tool_interceptor(
                 if metrics is not None:
                     record_tool_call(
                         metrics,
-                        phase=phase_name,
-                        scope_label=limit_scope_label,
                         is_error=True,
                     )
-                return _format_tool_consecutive_limit_reached(
+                return format_tool_consecutive_limit_reached(
                     request,
                     consecutive_limit=same_tool_streak_limit,
-                    current_consecutive_calls=same_tool_streak_count,
-                    scope_label=limit_scope_label,
                 )
 
-            tool_calls_used += 1
-            current_calls = tool_calls_used
             last_tool_name = request.name
             same_tool_streak_count = prospective_streak
             current_streak = same_tool_streak_count
 
         execution_logger.info(
-            "Calling tool (%s/%s) in %s: %s (streak %s/%s) with args: %s",
-            current_calls,
-            tool_call_limit if tool_call_limit is not None else "unbounded",
-            limit_scope_label,
+            "Calling tool: %s (streak %s/%s) with args: %s",
             request.name,
             current_streak,
             same_tool_streak_limit
@@ -271,14 +200,12 @@ def _build_tool_interceptor(
             if metrics is not None:
                 record_tool_call(
                     metrics,
-                    phase=phase_name,
-                    scope_label=limit_scope_label,
                     is_error=True,
                 )
             return _format_tool_error(request, error)
 
         try:
-            record_tool_result(result, metrics, limit_scope_label, phase_name)
+            record_tool_result(result, metrics)
         except Exception:
             logger.warning("Failed to record tool result metrics")
         execution_logger.info(f"Tool {request.name} returned: {result}")
@@ -290,19 +217,13 @@ def _build_tool_interceptor(
 @asynccontextmanager
 async def mcp_tool_session(
     *,
-    tool_call_limit: int | None = None,
     same_tool_streak_limit: int | None = None,
-    limit_scope_label: str = "MCPToolSession",
     extra_headers: dict[str, str] | None = None,
-    phase: str | None = None,
     metrics: dict[str, Any] | None = None,
 ) -> AsyncGenerator[list[Any]]:
     settings = get_settings()
     tool_interceptor = _build_tool_interceptor(
-        tool_call_limit=tool_call_limit,
         same_tool_streak_limit=same_tool_streak_limit,
-        limit_scope_label=limit_scope_label,
-        phase=phase,
         metrics=metrics,
     )
 

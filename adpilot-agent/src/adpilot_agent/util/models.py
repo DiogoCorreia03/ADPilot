@@ -51,7 +51,7 @@ def get_model_for_caller(caller_name: str) -> BaseChatModel:
         raise ValueError(f"Invalid MODEL_MODE: {settings.MODEL_MODE}")
 
 
-def get_agent(caller_name: str, *, tools: Sequence[Any] | None = None) -> CompiledStateGraph:
+def get_agent(caller_name: str = "", *, tools: Sequence[Any] | None = None) -> CompiledStateGraph:
     """Create a compiled agent graph for the specified caller with optional tools."""
     model = get_model_for_caller(caller_name)
     tool_list = list(tools) if tools is not None else []
