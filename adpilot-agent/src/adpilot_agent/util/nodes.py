@@ -5,12 +5,12 @@ from langchain.messages import AIMessage
 from langchain_core.callbacks import get_usage_metadata_callback
 
 from .config import get_settings
+from .execution_logger import log_execution_event
 from .exceptions import EmptyLLMResponseError, InvalidLLMResponseError
 from .metrics import record_token_usage
 
 # Set up logging
 logger = logging.getLogger(__name__)
-execution_logger = logging.getLogger("execution")
 
 
 def _extract_token_usage(
@@ -33,16 +33,13 @@ def _extract_token_usage(
         logger.debug("Hybrid/multi-model usage metadata detected: %s", usage_metadata)
         return {
             "input_tokens": sum(
-                int(m.get("input_tokens", 0) or 0)
-                for m in usage_metadata.values()
+                int(m.get("input_tokens", 0) or 0) for m in usage_metadata.values()
             ),
             "output_tokens": sum(
-                int(m.get("output_tokens", 0) or 0)
-                for m in usage_metadata.values()
+                int(m.get("output_tokens", 0) or 0) for m in usage_metadata.values()
             ),
             "total_tokens": sum(
-                int(m.get("total_tokens", 0) or 0)
-                for m in usage_metadata.values()
+                int(m.get("total_tokens", 0) or 0) for m in usage_metadata.values()
             ),
         }
 
@@ -80,11 +77,15 @@ def _extract_text_content(content: Any) -> str:
                 elif "content" in part and isinstance(part["content"], str):
                     parts.append(part["content"])
                 else:
-                    logger.warning("Skipping non-text content part in message: %s", part)
+                    logger.warning(
+                        "Skipping non-text content part in message: %s", part
+                    )
             elif hasattr(part, "text") and isinstance(part.text, str):
                 parts.append(part.text)
             else:
-                logger.warning("Skipping unhandled content part type: %s", type(part).__name__)
+                logger.warning(
+                    "Skipping unhandled content part type: %s", type(part).__name__
+                )
         text = "".join(parts)
     else:
         raise InvalidLLMResponseError(
@@ -121,15 +122,21 @@ async def invoke_agent_once(
 
     message = _extract_ai_message(result)
     response = _extract_text_content(message.content)
-    
-    # TODO confirm it works
-    messages = result.get("messages", [])
+
+    messages = result.get("messages", []) if isinstance(result, dict) else messages
     prompts = [m for m in messages if not isinstance(m, AIMessage)]
-    lines = ["================================= PROMPT =================================",]
-    for msg in prompts:
-        lines.append(f"\n{_extract_text_content(msg.content)}")
-    lines.append("================================ RESPONSE ================================")
-    lines.append(f"{response}")
-    execution_logger.info("\n".join(lines))
+    serialized_prompts = [
+        {
+            "role": getattr(m, "type", "user"),
+            "content": _extract_text_content(getattr(m, "content", str(m))),
+        }
+        for m in prompts
+    ]
     
+    log_execution_event(
+        event_type="llm_call",
+        input=serialized_prompts,
+        output=response,
+    )
+
     return response

@@ -21,6 +21,7 @@ from .util import (
     get_agent,
     get_settings,
     mcp_tool_session,
+    setup_execution_logger,
 )
 from .util.metrics import format_run_summary, new_run_metrics
 from .util.nodes import invoke_agent_once
@@ -46,14 +47,9 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
-execution_handler = logging.FileHandler(
-    executionFolder / f"execution-{t}.log", mode="w"
-)  # TODO maybe use JSONL, see https://gemini.google.com/app/34eebd6d8fb67db3
-execution_handler.setLevel(logging.INFO)
-execution_handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
-execution_logger = logging.getLogger("execution")
-execution_logger.setLevel(logging.INFO)
-execution_logger.addHandler(execution_handler)
+execution_logger, execution_handler = setup_execution_logger(
+    executionFolder / f"execution-{t}.jsonl"
+)
 
 # ! needs to be the same as the one in the MCP Server
 AGENT_PHASE_HEADER = "pentest_phase"  # todo put in .env/config.py
@@ -72,10 +68,10 @@ async def async_main():
             # TODO queremos este llm simples a gerar um report no fim ou só olhamos para os execution logs?
 
             messages = [
-                SystemMessage(), # TODO prompt gigante
+                SystemMessage(),  # TODO prompt gigante
                 HumanMessage(),
             ]
-            
+
         try:
             return await invoke_agent_once(
                 agent,

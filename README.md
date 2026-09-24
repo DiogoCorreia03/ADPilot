@@ -7,7 +7,7 @@
 [![Model Context Protocol](https://img.shields.io/badge/protocol-MCP-purple.svg)](https://modelcontextprotocol.io/)
 [![FastMCP](https://img.shields.io/badge/framework-FastMCP-brightgreen.svg)](https://github.com/jlowin/fastmcp)
 [![Docker](https://img.shields.io/badge/deployment-docker--compose-blue.svg)](adpilot-mcp-server/compose.yaml)
-[![License](https://img.shields.io/badge/license-Proprietary%20%2F%20Research-red.svg)](#disclaimer)
+[![License](<https://img.shields.io/badge/license-Proprietary%20%2F%20Research-red.svg>)](#disclaimer)
 
 ---
 
@@ -22,27 +22,28 @@ By decoupling cognitive orchestration from offensive tool execution via the **Mo
 - [System Overview](#system-overview)
 - [System Architecture](#system-architecture)
 - [Subproject Overview](#subproject-overview)
-  - [1. adpilot-agent (MCP Host & Orchestrator)](#1-adpilot-agent-mcp-host--orchestrator)
+  - [1. adpilot-agent (MCP Host &amp; Orchestrator)](#1-adpilot-agent-mcp-host--orchestrator)
   - [2. adpilot-mcp-server (Offensive Execution Server)](#2-adpilot-mcp-server-offensive-execution-server)
-  - [3. cli (Debugging & Testing Tool Runner)](#3-cli-debugging--testing-tool-runner)
-- [Pentest Phases & Methodology](#pentest-phases--methodology)
+  - [3. cli (Debugging &amp; Testing Tool Runner)](#3-cli-debugging--testing-tool-runner)
+- [Pentest Phases &amp; Methodology](#pentest-phases--methodology)
 - [Multi-Agent Workflow (LangGraph)](#multi-agent-workflow-langgraph)
 - [Quickstart Guide](#quickstart-guide)
   - [Step 1: Deploy the MCP Server (Target Network)](#step-1-deploy-the-mcp-server-target-network)
   - [Step 2: (Optional) Verify via the Debugging CLI](#step-2-optional-verify-via-the-debugging-cli)
   - [Step 3: Run the Autonomous Agent](#step-3-run-the-autonomous-agent)
 - [Configuration Reference](#configuration-reference)
-- [Safety & Operational Guardrails](#safety--operational-guardrails)
-- [Telemetry & Reporting](#telemetry--reporting)
+- [Safety &amp; Operational Guardrails](#safety--operational-guardrails)
+- [Telemetry &amp; Reporting](#telemetry--reporting)
 - [Disclaimer](#disclaimer)
 
 ---
 
 ## System Overview
 
-Traditional penetration testing in complex Active Directory environments requires navigating multi-stage attack paths (e.g., initial reconnaissance, credential harvesting, Kerberos ticket manipulation, privilege escalation, and domain compromise). 
+Traditional penetration testing in complex Active Directory environments requires navigating multi-stage attack paths (e.g., initial reconnaissance, credential harvesting, Kerberos ticket manipulation, privilege escalation, and domain compromise).
 
 ADPilot automates this process through:
+
 1. **Separation of Concerns (MCP Host & Server)**: The LLM reasoning engine ([`adpilot-agent`](./adpilot-agent)) acts as an **MCP Host** running on an operator/control machine. It connects over HTTP/SSE (direct or through an ngrok tunnel) to the [`adpilot-mcp-server`](./adpilot-mcp-server) deployed inside an attacker container or virtual machine on the target network.
 2. **Phase-Bounded Operation**: Assessments are structured into four sequential phases. Offensive tools are filtered dynamically so that agents only see tools aligned with the current operational objective.
 3. **Hierarchical Multi-Agent Graph**: Instead of an unconstrained single prompt, ADPilot coordinates specialized agent personas (Recon Summarizer, Planner, Selector, Worker/Exploiter, Quality Checker, Tree Updater, and Final Reporter) using **LangGraph**.
@@ -101,6 +102,7 @@ ADPilot/
 ```
 
 ### 1. [adpilot-agent](./adpilot-agent)
+
 *Main Application — MCP Host & Multi-Agent Orchestrator*
 
 - Implemented in Python 3.12+ using **LangGraph**, **LangChain MCP Adapters**, and **Pydantic Settings**.
@@ -111,6 +113,7 @@ ADPilot/
 - See the [adpilot-agent README](./adpilot-agent/README.md) for full details.
 
 ### 2. [adpilot-mcp-server](./adpilot-mcp-server)
+
 *Main Application — Remote Offensive MCP Server*
 
 - Built with **FastMCP** and packaged as a Docker container running Ubuntu Linux with a comprehensive penetration testing toolchain.
@@ -122,6 +125,7 @@ ADPilot/
 - See the [adpilot-mcp-server README](./adpilot-mcp-server/README.md) for full details.
 
 ### 3. [cli](./cli)
+
 *Diagnostic Tool — Interactive MCP Client for Testing and Debugging*
 
 - A standalone terminal application built with `rich` and `prompt-toolkit` to interact directly with the MCP server without running the autonomous agent.
@@ -140,12 +144,12 @@ ADPilot/
 
 ADPilot enforces a phased operational workflow. Tools and agent permissions are restricted to the current phase to ensure logical progression:
 
-| Phase | Identifier | Core Objective | Permitted Activities | Forbidden Activities |
-| :--- | :--- | :--- | :--- | :--- |
-| **1. External Reconnaissance** | `external_reconnaissance` | Perimeter mapping & surface discovery | Port scanning (`nmap`), DNS lookups (`nslookup`), SMB null sessions, unauthenticated user enumeration (`kerbrute`). | Credential testing, password spraying, authentication attempts, exploitation. |
-| **2. Initial Access** | `initial_access` | Establish first authenticated foothold | AS-REP roasting (`GetNPUsers`), Kerberoasting (`GetUserSPNs`), password spraying (`kerbrute`), offline hash cracking (`hashcat`). | Deep internal AD mapping, privilege escalation, lateral movement, persistence. |
-| **3. Internal Reconnaissance** | `internal_reconnaissance` | Map domain objects & attack paths | LDAP enumeration (`ldapsearch`, `ldapdomaindump`, `GetADUsers`), delegation discovery (`findDelegation`), RID cycling (`lookupsid`). | Active privilege escalation, lateral movement, account modification. |
-| **4. Lateral Movement & PrivEsc** | `lateral_movement_and_privilege_escalation` | Demonstrate privilege escalation & domain compromise | AD CS abuse (`certipy`), remote execution (`wmiexec`), credential extraction (`secretsdump`), ticket forging (`ticketer`). | Out-of-scope destructive actions, unapproved data destruction. |
+| Phase                                   | Identifier                                    | Core Objective                                       | Permitted Activities                                                                                                                           | Forbidden Activities                                                           |
+| :-------------------------------------- | :-------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- |
+| **1. External Reconnaissance**    | `external_reconnaissance`                   | Perimeter mapping & surface discovery                | Port scanning (`nmap`), DNS lookups (`nslookup`), SMB null sessions, unauthenticated user enumeration (`kerbrute`).                      | Credential testing, password spraying, authentication attempts, exploitation.  |
+| **2. Initial Access**             | `initial_access`                            | Establish first authenticated foothold               | AS-REP roasting (`GetNPUsers`), Kerberoasting (`GetUserSPNs`), password spraying (`kerbrute`), offline hash cracking (`hashcat`).      | Deep internal AD mapping, privilege escalation, lateral movement, persistence. |
+| **3. Internal Reconnaissance**    | `internal_reconnaissance`                   | Map domain objects & attack paths                    | LDAP enumeration (`ldapsearch`, `ldapdomaindump`, `GetADUsers`), delegation discovery (`findDelegation`), RID cycling (`lookupsid`). | Active privilege escalation, lateral movement, account modification.           |
+| **4. Lateral Movement & PrivEsc** | `lateral_movement_and_privilege_escalation` | Demonstrate privilege escalation & domain compromise | AD CS abuse (`certipy`), remote execution (`wmiexec`), credential extraction (`secretsdump`), ticket forging (`ticketer`).             | Out-of-scope destructive actions, unapproved data destruction.                 |
 
 ---
 
@@ -196,12 +200,13 @@ flowchart TD
 Deploy the MCP server on an attacker machine (or container) with direct network visibility into the target Active Directory environment.
 
 1. Navigate to [`adpilot-mcp-server`](./adpilot-mcp-server):
+
    ```bash
    cd adpilot-mcp-server
    cp .env.example .env
    ```
-
 2. Configure `.env` with your desired port and ngrok credentials:
+
    ```ini
    HOST=0.0.0.0
    PORT=8000
@@ -209,8 +214,8 @@ Deploy the MCP server on an attacker machine (or container) with direct network 
    NGROK_AUTHTOKEN="your-ngrok-token"
    NGROK_DOMAIN="your-subdomain.ngrok-free.app"
    ```
-
 3. Start the container suite via Docker Compose:
+
    ```bash
    docker compose up -d
    docker compose logs -f server
@@ -221,18 +226,19 @@ Deploy the MCP server on an attacker machine (or container) with direct network 
 Before launching autonomous execution, verify server connectivity and tool execution using the diagnostic CLI:
 
 1. Navigate to [`cli`](./cli):
+
    ```bash
    cd ../cli
    uv sync
    ```
-
 2. Configure environment variables (or rely on `adpilot-agent/.env`):
+
    ```bash
    # Run the interactive tool client
    uv run mcp-cli
    ```
-
 3. Test basic operations:
+
    ```text
    mcp> list
    mcp> search nmap
@@ -243,12 +249,13 @@ Before launching autonomous execution, verify server connectivity and tool execu
 ### Step 3: Run the Autonomous Agent
 
 1. Navigate to [`adpilot-agent`](./adpilot-agent):
+
    ```bash
    cd ../adpilot-agent
    cp .env.example .env
    ```
-
 2. Configure `.env`:
+
    ```ini
    # MCP Server Endpoint
    ATTACKER_MACHINE_URL="https://your-subdomain.ngrok-free.app/mcp"
@@ -264,14 +271,14 @@ Before launching autonomous execution, verify server connectivity and tool execu
    REMOTE_MODEL="gemini-2.5-flash"
    REMOTE_API_KEY="your-api-key"
    ```
-
 3. Install dependencies and start the agent:
+
    ```bash
    uv sync
    uv run adpilot-agent
    ```
-
 4. **Interactive Monitoring**:
+
    - Watch real-time execution steps and agent decisions in the console.
    - At any time during execution, type `n` or `next` and press <kbd>Enter</kbd> to fast-forward past the current phase.
 
@@ -281,23 +288,23 @@ Before launching autonomous execution, verify server connectivity and tool execu
 
 Key settings configurable via environment variables or `.env` files:
 
-| Variable | Component | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `ATTACKER_MACHINE_URL` | Agent / CLI | *Required* | Streamable HTTP endpoint for the MCP Server (e.g. `http://host:8000/mcp` or ngrok URL). |
-| `ATTACKER_MACHINE_AUTH_TOKEN` | Agent / CLI | `""` | Basic authentication credentials (`username:password`) for the MCP endpoint. |
-| `NETWORK` | Agent | *Required* | Target network CIDR range (e.g., `192.168.122.0/24`). |
-| `DC_IP` | Agent | *Required* | IP address of the primary Domain Controller. |
-| `IGNORED_HOSTS` | Agent | `""` | Comma-separated IP addresses to exclude from scanning and targeting. |
-| `MODEL_MODE` | Agent | `"remote"` | Routing mode: `remote` (cloud LLMs), `local` (Ollama), or `hybrid` (mixed). |
-| `REMOTE_MODEL` | Agent | `"gemini-2.5-flash"` | Remote model identifier. |
-| `REMOTE_API_KEY` | Agent | `""` | API key for remote LLM provider. |
-| `LOCAL_MODEL` | Agent | `"qwen2.5"` | Local model identifier when using `local` or `hybrid` modes. |
-| `EXPLOIT_MAX_TOOL_CALLS` | Agent | `10` | Hard cap on tool calls allowed for a single task execution. |
-| `EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW` | Agent | `5` | Maximum consecutive invocations of the same tool before blocking repetition. |
-| `CHECK_MAX_RETRIES` | Agent | `3` | Maximum retry attempts for a failing task before marking it `[FAILED]`. |
-| `ENABLE_INTERACTIVE_CLI` | Agent | `true` | Enables interactive stdin listener for phase advancement (`next`). |
-| `HOST` / `PORT` | MCP Server | `0.0.0.0` / `8000` | Bind host and port for the FastMCP server. |
-| `AD_STATE_DIR` | MCP Server | `./ad-pentest/state` | Directory for persisting captured credentials and session state. |
+| Variable                                 | Component   | Default                | Description                                                                              |
+| :--------------------------------------- | :---------- | :--------------------- | :--------------------------------------------------------------------------------------- |
+| `ATTACKER_MACHINE_URL`                 | Agent / CLI | *Required*           | Streamable HTTP endpoint for the MCP Server (e.g.`http://host:8000/mcp` or ngrok URL). |
+| `ATTACKER_MACHINE_AUTH_TOKEN`          | Agent / CLI | `""`                 | Basic authentication credentials (`username:password`) for the MCP endpoint.           |
+| `NETWORK`                              | Agent       | *Required*           | Target network CIDR range (e.g.,`192.168.122.0/24`).                                   |
+| `DC_IP`                                | Agent       | *Required*           | IP address of the primary Domain Controller.                                             |
+| `IGNORED_HOSTS`                        | Agent       | `""`                 | Comma-separated IP addresses to exclude from scanning and targeting.                     |
+| `MODEL_MODE`                           | Agent       | `"remote"`           | Routing mode:`remote` (cloud LLMs), `local` (Ollama), or `hybrid` (mixed).         |
+| `REMOTE_MODEL`                         | Agent       | `"gemini-2.5-flash"` | Remote model identifier.                                                                 |
+| `REMOTE_API_KEY`                       | Agent       | `""`                 | API key for remote LLM provider.                                                         |
+| `LOCAL_MODEL`                          | Agent       | `"qwen2.5"`          | Local model identifier when using`local` or `hybrid` modes.                          |
+| `EXPLOIT_MAX_TOOL_CALLS`               | Agent       | `10`                 | Hard cap on tool calls allowed for a single task execution.                              |
+| `EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW` | Agent       | `5`                  | Maximum consecutive invocations of the same tool before blocking repetition.             |
+| `CHECK_MAX_RETRIES`                    | Agent       | `3`                  | Maximum retry attempts for a failing task before marking it`[FAILED]`.                 |
+| `ENABLE_INTERACTIVE_CLI`               | Agent       | `true`               | Enables interactive stdin listener for phase advancement (`next`).                     |
+| `HOST` / `PORT`                      | MCP Server  | `0.0.0.0` / `8000` | Bind host and port for the FastMCP server.                                               |
+| `AD_STATE_DIR`                         | MCP Server  | `./ad-pentest/state` | Directory for persisting captured credentials and session state.                         |
 
 ---
 
@@ -319,7 +326,7 @@ During and after an assessment, ADPilot maintains structured audit trails:
 
 - **Assessment Reports (`adpilot-agent/reports/`)**: Complete client-ready Markdown reports synthesized by the `FinalReport` agent, containing executive summaries, discovered vulnerabilities, compromised accounts, and remediation recommendations.
 - **Application Run Logs (`adpilot-agent/logs/`)**: Timestamped logs (`run-<timestamp>.log`) recording state changes, agent routing decisions, and MCP communications.
-- **Execution Telemetry (`adpilot-agent/executions/`)**: Raw prompt/response interactions and tool invocation logs (`execution-<timestamp>.log`).
+- **Execution Telemetry (`adpilot-agent/executions/`)**: Raw prompt/response interactions and tool invocation logs (`execution-<timestamp>.jsonl`).
 - **Performance Summaries**: Per-phase metrics tracking tool invocations, error frequencies, and token consumption printed at the conclusion of each run.
 
 ---
@@ -327,7 +334,7 @@ During and after an assessment, ADPilot maintains structured audit trails:
 ## Disclaimer
 
 > [!CAUTION]
-> **Authorized Penetration Testing and Research Only**  
-> ADPilot is developed exclusively for authorized security assessments, educational laboratory experiments, and academic research in controlled environments.  
-> 
+> **Authorized Penetration Testing and Research Only**
+> ADPilot is developed exclusively for authorized security assessments, educational laboratory experiments, and academic research in controlled environments.
+>
 > Operating this software against networks, servers, or Active Directory environments without prior explicit, written authorization from the system owners is illegal and subject to criminal and civil penalties under computer crime legislation. The authors and contributors assume no liability for misuse, damages, or unintended consequences resulting from the use of this software.

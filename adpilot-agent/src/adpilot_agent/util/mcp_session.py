@@ -14,11 +14,11 @@ from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
 
 from .config import get_settings
+from .execution_logger import log_execution_event
 from .metrics import record_tool_call
 
 # Set up logging
 logger = logging.getLogger(__name__)
-execution_logger = logging.getLogger("execution")
 
 
 class HTTPClient(AsyncClient):
@@ -113,8 +113,6 @@ def _format_tool_error(request: MCPToolCallRequest, error: Exception) -> ToolMes
     )
 
 
-
-
 def format_tool_consecutive_limit_reached(
     request: MCPToolCallRequest,
     *,
@@ -158,11 +156,19 @@ def _build_tool_interceptor(
                 same_tool_streak_limit is not None
                 and prospective_streak > same_tool_streak_limit
             ):
-                execution_logger.info(
-                    "Consecutive tool call limit reached for tool '%s' (%s/%s). Agent must switch to a different tool or finalize with gathered evidence.",
-                    request.name,
-                    same_tool_streak_count,
-                    same_tool_streak_limit,
+                log_execution_event(
+                    event_type="tool_limit",
+                    input={
+                        "tool": request.name,
+                        "args": request.args,
+                        "streak_count": same_tool_streak_count,
+                        "streak_limit": same_tool_streak_limit,
+                    },
+                    output={
+                        "status": "blocked",
+                        "reason": "consecutive_tool_limit_reached",
+                    },
+                    message=f"Consecutive tool call limit reached for tool '{request.name}' ({same_tool_streak_count}/{same_tool_streak_limit}). Agent must switch to a different tool or finalize with gathered evidence.",
                 )
                 if metrics is not None:
                     record_tool_call(
@@ -176,25 +182,19 @@ def _build_tool_interceptor(
 
             last_tool_name = request.name
             same_tool_streak_count = prospective_streak
-            current_streak = same_tool_streak_count
-
-        execution_logger.info(
-            "Calling tool: %s (streak %s/%s) with args: %s",
-            request.name,
-            current_streak,
-            same_tool_streak_limit
-            if same_tool_streak_limit is not None
-            else "unbounded",
-            request.args,
-        )
 
         try:
             result = await handler(request)
         except Exception as error:
-            execution_logger.info(
-                "Tool %s failed with error: %s.",
-                request.name,
-                error,
+            log_execution_event(
+                event_type="tool_error",
+                input={
+                    "tool": request.name,
+                    "args": request.args,
+                },
+                output={"error": str(error), "error_type": error.__class__.__name__},
+                message=f"Tool {request.name} failed with error: {error}.",
+                level=logging.WARNING,
             )
             # Return a structured observation instead of raising so the model can recover.
             if metrics is not None:
@@ -208,7 +208,23 @@ def _build_tool_interceptor(
             record_tool_result(result, metrics)
         except Exception:
             logger.warning("Failed to record tool result metrics")
-        execution_logger.info(f"Tool {request.name} returned: {result}")
+
+        content_list = getattr(result, "content", None)
+        if content_list and len(content_list) > 0:
+            first_part = content_list[0]
+            tool_output = getattr(first_part, "text", str(first_part))
+        else:
+            tool_output = str(result)
+
+        log_execution_event(
+            event_type="tool_call",
+            input={
+                "tool": request.name,
+                "args": request.args,
+                "streak_count": f"{same_tool_streak_count}/{same_tool_streak_limit if same_tool_streak_limit is not None else 'unbounded'}",
+            },
+            output=tool_output,
+        )
         return result
 
     return _tool_interceptor
