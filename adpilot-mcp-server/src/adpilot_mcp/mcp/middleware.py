@@ -42,6 +42,10 @@ class ToolFilterMiddleware(Middleware):
         # If phase is None, return all tools. Otherwise, filter tools by phase.
         if phase is not None:
             tools = [tool for tool in tools if phase in tool.tags]
+        else:
+            tools = [
+                tool for tool in tools if PentestPhase.CHECK_RESULTS not in tool.tags
+            ]
 
         # Clean tags from tools to avoid confusing the LLM
         clean_tools = []
