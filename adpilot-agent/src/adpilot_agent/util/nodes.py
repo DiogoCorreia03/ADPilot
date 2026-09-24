@@ -675,6 +675,7 @@ async def final_report(state: PentestState) -> dict[str, Any]:
 
     async with mcp_tool_session(
         limit_scope_label="FinalReport", # TODO maybe remover
+        extra_headers={AGENT_PHASE_HEADER: "check_results"},
         metrics=metrics, # TODO maybe remover
     ) as tools:
         credentials_result = ""
