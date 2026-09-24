@@ -104,7 +104,7 @@ For every completed task:
 ## STATUS UPDATE RULES
 
 If the validated outcome is SUCCESS, mark the completed task as:
-[DONE]
+[SUCCESS]
 
 If the validated outcome is FAILURE, mark the completed task as:
 [FAILED]
@@ -112,7 +112,7 @@ If the validated outcome is FAILURE, mark the completed task as:
 Add findings below the task.
 
 Example:
-2.1. [DONE] Anonymous SMB enumeration on 10.0.0.5
+2.1. [SUCCESS] Anonymous SMB enumeration on 10.0.0.5
         Domain: CORP.LOCAL
         Share: PUBLIC
         Hostname: DC01
@@ -233,7 +233,7 @@ Create new tasks ONLY if:
 Otherwise update status only. Do not add tasks. This is expected behavior.
 
 Eventually all remaining tasks will be:
-[DONE]
+[SUCCESS]
 or
 [FAILED]
 

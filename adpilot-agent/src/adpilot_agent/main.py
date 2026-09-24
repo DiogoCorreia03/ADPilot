@@ -69,7 +69,6 @@ execution_logger = logging.getLogger("execution")
 execution_logger.setLevel(logging.INFO)
 execution_logger.addHandler(execution_handler)
 
-# TODO successful tasks should probably be marked with SUCCESS instead of DONE
 
 
 async def async_main():

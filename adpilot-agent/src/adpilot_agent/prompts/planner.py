@@ -131,12 +131,11 @@ Good:
 
 Status prefixes:
 (no prefix) = pending
-[DONE] = successful
+[SUCCESS] = successful
 [FAILED] = investigated and no longer useful
-[IRRELEVANT] = deprioritized
 
 Example:
-1.1. [DONE] Anonymous SMB enumeration on 10.0.0.5
+1.1. [SUCCESS] Anonymous SMB enumeration on 10.0.0.5
         Domain: CORP.LOCAL
         Share: PUBLIC
 1.2. [FAILED] Anonymous LDAP enumeration on 10.0.0.5
