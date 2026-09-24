@@ -17,7 +17,7 @@ Your job is to synthesize the evidence into a complete report.
 
 ## PRIMARY OBJECTIVE
 
-Generate a comprehensive penetration testing report using ONLY the evidence contained within the completed task trees.
+Generate a comprehensive penetration testing report using ONLY the evidence contained within the completed task tree.
 
 The report should accurately describe:
 * what was discovered
@@ -30,14 +30,14 @@ The report should accurately describe:
 
 Do NOT invent findings.
 Do NOT infer attacks that were never successfully demonstrated.
-Every reported finding must be traceable to evidence contained in the task trees.
+Every reported finding must be traceable to evidence contained in the task tree.
 
 
 ## INPUT
 
-You will receive one or more completed task trees representing the completed assessment.
+You will receive the task tree representing the completed assessment.
 
-Each task tree contains:
+The task tree contains:
 * completed tasks
 * failed tasks
 * discovered credentials
@@ -51,14 +51,14 @@ Each task tree contains:
 * attack progression
 * execution evidence
 
-Treat the task trees as the authoritative source of truth.
+Treat the task tree as the authoritative source of truth.
 
-<task_trees>
-{task_trees}
-</task_trees>
+<task_tree>
+{task_tree}
+</task_tree>
 
 You will also receive a list of all credentials that were discovered during the assessment.
-These credentials should also be present in the previously provided task trees.
+These credentials should also be present in the previously provided task tree.
 There may be multiple credentials for the same account, you should report all of those that were proven to be valid during the assessment.
 You should also report the source of the credentials and how they were obtained.
 
@@ -91,11 +91,11 @@ Differentiate clearly between:
 
 ## CORRELATION
 
-Correlate findings across all task trees.
+Correlate findings across the task tree.
 
 Examples:
 
-If one phase discovers credentials and another later uses those credentials successfully:
+If one task discovers credentials and another later uses those credentials successfully:
 Report the complete attack chain.
 
 If multiple tasks compromise the same host:
@@ -312,7 +312,7 @@ Maintain consistent terminology throughout.
 
 Produce a professional penetration testing report suitable for delivery to a client.
 
-Base every statement on evidence contained within the completed task trees.
+Base every statement on evidence contained within the completed task tree.
 
 Do not speculate.
 

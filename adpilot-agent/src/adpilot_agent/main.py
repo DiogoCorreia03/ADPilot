@@ -22,11 +22,9 @@ from langgraph.graph import END, START, StateGraph
 from .util import (
     CheckVerdict,
     PentestState,
-    Phase,
     get_settings,
     route_after_check,
     route_after_selector,
-    route_after_phase_transition,
     setup_execution_logger,
 )
 from .util.nodes import (
@@ -35,7 +33,6 @@ from .util.nodes import (
     exploit_node,
     final_report,
     initial_scan,
-    phase_transition_node,
     select_next_task,
     update_plan_failure,
     update_plan_success,
@@ -67,36 +64,8 @@ execution_logger, execution_handler = setup_execution_logger(
     executionFolder / f"execution-{t}.jsonl"
 )
 
-# TODO restruturar divisão entre SystemMessage e HumanMessage: https://share.gemini.google/iAlgJQuBIgYk
-
 async def async_main():
-    loop = asyncio.get_running_loop()
-    advance_phase_request = asyncio.Event()
     start_time = time.perf_counter()
-
-    def watch_for_phase_advance() -> None:
-        print(
-            "Type 'n' or 'next' in the terminal to advance to the next phase.",
-            flush=True,
-        )
-        try:
-            while True:
-                command = sys.stdin.readline()
-                if not command:
-                    return
-
-                normalized_command = command.strip().lower()
-                if normalized_command in {"n", "next"}:
-                    loop.call_soon_threadsafe(advance_phase_request.set)
-                    print(
-                        "Advance-phase request queued for the next selector pass.",
-                        flush=True,
-                    )
-                    logger.debug(
-                        "Advance-phase request queued for the next selector pass."
-                    )
-        except (EOFError, OSError):
-            return
 
     workflow = StateGraph(PentestState)
     workflow.add_node("InitialScan", initial_scan)
@@ -106,7 +75,6 @@ async def async_main():
     workflow.add_node("CheckNode", check_node)
     workflow.add_node("UpdatePlanSuccess", update_plan_success)
     workflow.add_node("UpdatePlanFailure", update_plan_failure)
-    workflow.add_node("PhaseTransitionNode", phase_transition_node)
     workflow.add_node("FinalReport", final_report)
 
     workflow.add_edge(START, "InitialScan")
@@ -121,8 +89,6 @@ async def async_main():
 
     workflow.add_conditional_edges("CheckNode", route_after_check)
 
-    workflow.add_conditional_edges("PhaseTransitionNode", route_after_phase_transition)
-
     workflow.add_edge("FinalReport", END)
 
     graph = workflow.compile()
@@ -135,32 +101,17 @@ async def async_main():
         "scan_results": "",
         "scenario": "",
         "plan": "",
-        "external_recon_plan": "",
-        "initial_access_plan": "",
-        "internal_recon_plan": "",
-        "lateral_privesc_plan": "",
         "next_task": "",
         "task_result": "",
         "check_count": 0,
         "check_output": "",
         "check_verdict": CheckVerdict.RETRY,
-        "current_phase": Phase.EXTERNAL_RECON,
-        "advance_phase_request": advance_phase_request,
         "run_metrics": new_run_metrics(),
     }
 
-    if settings.ENABLE_INTERACTIVE_CLI and sys.stdin and sys.stdin.isatty():
-        watcher_thread = threading.Thread(target=watch_for_phase_advance, daemon=True)
-        watcher_thread.start()
-    else:
-        print("Interactive CLI phase watcher disabled (non-interactive environment).")
     try:
         final_state = await graph.ainvoke(initial_state)
         print(format_run_summary(final_state["run_metrics"]))
-        print(f"external_recon_plan: {final_state['external_recon_plan']}")
-        print(f"initial_access_plan: {final_state['initial_access_plan']}")
-        print(f"internal_recon_plan: {final_state['internal_recon_plan']}")
-        print(f"lateral_privesc_plan: {final_state['lateral_privesc_plan']}")
     finally:
         elapsed_seconds = time.perf_counter() - start_time
         print(f"Execution time: {elapsed_seconds:.2f}s")

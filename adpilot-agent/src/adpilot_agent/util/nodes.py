@@ -25,40 +25,13 @@ from .execution_logger import log_execution_event
 from .mcp_session import list_tools, mcp_tool_session
 from .metrics import record_exploit_node_run, record_token_usage
 from .models import get_agent
-from .state import CheckVerdict, PentestState, Phase
+from .state import CheckVerdict, PentestState
 
 # Set up logging
 logger = logging.getLogger(__name__)
 
-
-# ! needs to be the same as the ones in the MCP Server
-_PHASE_PLAN_KEYS: dict[Phase, str] = {
-    Phase.EXTERNAL_RECON: "external_recon_plan",
-    Phase.INITIAL_ACCESS: "initial_access_plan",
-    Phase.INTERNAL_RECON: "internal_recon_plan",
-    Phase.LATERAL_PRIVESC: "lateral_privesc_plan",
-}
-
 # ! needs to be the same as the one in the MCP Server
 AGENT_PHASE_HEADER = "pentest_phase"  # todo put in .env/config.py
-
-
-def _format_historical_task_trees(state: PentestState) -> str:
-    """Consolidate plans from completed phases into a single clean string with clear section headers."""
-    phase_sections = [
-        ("External Reconnaissance Phase", state.get("external_recon_plan", "")),
-        ("Initial Access Phase", state.get("initial_access_plan", "")),
-        ("Internal Reconnaissance Phase", state.get("internal_recon_plan", "")),
-        (
-            "Lateral Movement & Privilege Escalation Phase",
-            state.get("lateral_privesc_plan", ""),
-        ),
-    ]
-    formatted = []
-    for title, plan in phase_sections:
-        if plan and plan.strip():
-            formatted.append(f"### {title}:\n{plan.strip()}")
-    return "\n\n".join(formatted)
 
 
 def _extract_tool_text(result: Any) -> str:
@@ -181,7 +154,6 @@ async def _invoke_agent_once(
     messages: list,
     *,
     metrics: dict[str, Any],
-    phase: Phase | None,
     caller: str = "Agent",
 ) -> str:
     """Execute a single agent invocation pass, record token metrics, and return extracted text content."""
@@ -196,7 +168,6 @@ async def _invoke_agent_once(
     if usage_data:
         record_token_usage(
             metrics,
-            phase=phase,
             usage_metadata=usage_data,
         )
 
@@ -216,7 +187,6 @@ async def _invoke_agent_once(
     log_execution_event(
         event_type="llm_call",
         caller=caller,
-        phase=phase,
         input=serialized_prompts,
         output=response,
     )
@@ -229,7 +199,6 @@ async def _invoke_agent_with_retries(
     messages: list,
     *,
     metrics: dict[str, Any],
-    phase: Phase | None,
     caller: str = "Agent",
     max_attempts: int | None = None,
 ) -> str:
@@ -245,7 +214,6 @@ async def _invoke_agent_with_retries(
                 agent,
                 messages,
                 metrics=metrics,
-                phase=phase,
                 caller=caller,
             )
         except Exception as error:
@@ -254,7 +222,6 @@ async def _invoke_agent_with_retries(
             log_execution_event(
                 event_type="llm_error",
                 caller=caller,
-                phase=phase,
                 message=f"Agent invocation failed for {caller} (attempt {attempt}/{attempts_limit}): {error}",
                 level=logging.WARNING if attempt < attempts_limit else logging.ERROR,
             )
@@ -267,7 +234,6 @@ async def _invoke_agent_with_retries(
             log_execution_event(
                 event_type="llm_retry",
                 caller=caller,
-                phase=phase,
                 message=f"Retrying agent invocation for {caller} in {delay:.2f} seconds (attempt {attempt + 1}/{attempts_limit}).",
             )
             await asyncio.sleep(delay)
@@ -277,10 +243,6 @@ async def _invoke_agent_with_retries(
 
 async def initial_scan(state: PentestState) -> dict[str, Any]:
     settings = get_settings()
-    phase = state["current_phase"]
-    if phase is None:
-        logger.warning("Current phase is None.")
-        raise RuntimeError("Current phase is required for initial scan.")
     metrics = state["run_metrics"]
 
     async with mcp_tool_session(
@@ -288,7 +250,6 @@ async def initial_scan(state: PentestState) -> dict[str, Any]:
         extra_headers={
             AGENT_PHASE_HEADER: "shell_only"
         },  # TODO meter no .env/config.py
-        phase=phase.value,
         metrics=metrics,
     ) as tools:
         shell_tool = next((t for t in tools if "shell_exec" in t.name), None)
@@ -318,7 +279,6 @@ async def initial_scan(state: PentestState) -> dict[str, Any]:
         agent,
         messages,
         metrics=metrics,
-        phase=phase,
         caller="InitialScan",
     )
     logger.debug(f"Initial scan analysis result:\n{scan_result}")
@@ -340,35 +300,25 @@ async def create_initial_plan(state: PentestState) -> dict[str, Any]:
         )
         raise RuntimeError("Initial scan results are required to create initial plan.")
 
-    phase = state.get("current_phase", "")
-    if not phase:
-        logger.error("No current phase found in state when creating initial plan.")
-        raise RuntimeError("Current phase is required to create initial plan.")
-
     async with mcp_tool_session(
-        extra_headers={AGENT_PHASE_HEADER: phase.value},
-        phase=phase.value,
         metrics=metrics,
     ) as tools:
         tools_str = list_tools(tools)
 
     log_execution_event(
         event_type="tools_loaded",
-        phase=phase,
-        message=f"Loaded {len(tools)} tools for phase {phase.value}: {', '.join([getattr(t, 'name', str(t)) for t in tools])}",
+        message=f"Loaded {len(tools)} tools: {', '.join([getattr(t, 'name', str(t)) for t in tools])}",
         tools=tools_str,
     )
 
     messages = [
         SystemMessage(
             build_plan_prompt(
-                phase=phase,
                 dc_ip=settings.DC_IP,
                 network=settings.NETWORK,
                 ignored_hosts=settings.IGNORED_HOSTS_PROMPT,
                 scan_results=scan_results,
                 tools=tools_str,
-                previous_task_trees=_format_historical_task_trees(state),
             )
         ),
         HumanMessage(
@@ -384,7 +334,6 @@ async def create_initial_plan(state: PentestState) -> dict[str, Any]:
         agent,
         messages,
         metrics=metrics,
-        phase=phase,
         caller="Planner",
     )
     logger.info(f"Initial plan created:\n{plan}")
@@ -400,28 +349,10 @@ async def create_initial_plan(state: PentestState) -> dict[str, Any]:
 async def select_next_task(state: PentestState) -> dict[str, Any]:
     metrics = state["run_metrics"]
 
-    advance_phase_request = state.get("advance_phase_request")
-    if (
-        isinstance(advance_phase_request, asyncio.Event)
-        and advance_phase_request.is_set()
-    ):
-        logger.info("Advance-phase request received. Finishing current phase.")
-        advance_phase_request.clear()
-        return {
-            "next_task": "FINISHED",
-            "run_metrics": metrics,
-            "check_count": 0,
-        }
-
     plan = state.get("plan", "")
     if not plan:
         logger.warning("No plan found in state when selecting next task.")
         raise RuntimeError("Plan is required to select next task.")
-
-    phase = state.get("current_phase", "")
-    if not phase:
-        logger.warning("No current phase found in state when creating initial plan.")
-        raise RuntimeError("Current phase is required to create initial plan.")
 
     tools = state.get("tools", "")
     if not tools:
@@ -431,7 +362,7 @@ async def select_next_task(state: PentestState) -> dict[str, Any]:
     messages = [
         SystemMessage(
             SELECT_TASK_PROMPT.format(
-                task_tree=plan, phase_name=phase.value, tools=tools
+                task_tree=plan, tools=tools
             )
         ),
         HumanMessage(
@@ -445,7 +376,6 @@ async def select_next_task(state: PentestState) -> dict[str, Any]:
         agent,
         messages,
         metrics=metrics,
-        phase=phase,
         caller="Selector",
     )
     logger.info(f"Selected next task: {next_task}")
@@ -466,19 +396,12 @@ async def exploit_node(state: PentestState) -> dict[str, Any]:
         logger.warning("No next task found in state when attempting exploitation.")
         raise RuntimeError("Next task is required to attempt exploitation.")
 
-    phase = state.get("current_phase", "")
-    if not phase:
-        logger.warning("No current phase found in state when attempting exploitation.")
-        raise RuntimeError("Current phase is required for exploitation.")
-
     record_exploit_node_run(metrics)
 
     async with mcp_tool_session(
         tool_call_limit=settings.EXPLOIT_MAX_TOOL_CALLS,
         same_tool_streak_limit=settings.EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW,
         limit_scope_label="ExploitNode",
-        extra_headers={AGENT_PHASE_HEADER: phase.value},
-        phase=phase.value,
         metrics=metrics,
     ) as tools:
         messages = [
@@ -505,7 +428,6 @@ async def exploit_node(state: PentestState) -> dict[str, Any]:
             agent,
             messages,
             metrics=metrics,
-            phase=phase,
             caller="Executor",
         )
         logger.info(f"Exploit output: {exploit_output}")
@@ -528,15 +450,10 @@ async def check_node(state: PentestState) -> dict[str, Any]:
         raise RuntimeError("Task result is required to check task results.")
 
     metrics = state["run_metrics"]
-    phase = state["current_phase"]
-    if phase is None:
-        logger.error("Current phase is None.")
-        raise RuntimeError("Current phase is required for check node.")
 
     async with mcp_tool_session(
         limit_scope_label="CheckNode",
         extra_headers={AGENT_PHASE_HEADER: "check_results"},
-        phase=phase.value,
         metrics=metrics,
     ) as tools:
         messages = [
@@ -549,7 +466,6 @@ async def check_node(state: PentestState) -> dict[str, Any]:
             agent,
             messages,
             metrics=metrics,
-            phase=phase,
             caller="Checker",
         )
 
@@ -631,15 +547,9 @@ async def _update_plan_with_outcome(
         logger.warning("No task result found in state when updating plan.")
         raise RuntimeError("Task result is required to update plan.")
 
-    phase = state.get("current_phase", "")
-    if not phase:
-        logger.warning("No current phase found in state when updating plan.")
-        raise RuntimeError("Current phase is required to update plan.")
-
     messages = [
         SystemMessage(
             build_update_plan_prompt(
-                phase=phase,
                 dc_ip=settings.DC_IP,
                 network=settings.NETWORK,
                 ignored_hosts=settings.IGNORED_HOSTS_PROMPT,
@@ -648,7 +558,6 @@ async def _update_plan_with_outcome(
                 task=task,
                 task_result=task_result,
                 task_verdict=verdict.value,
-                previous_task_trees=_format_historical_task_trees(state),
             )
         ),
         HumanMessage(
@@ -661,7 +570,6 @@ async def _update_plan_with_outcome(
         agent,
         messages,
         metrics=metrics,
-        phase=phase,
         caller="Updater",
     )
     logger.info(f"Updated plan: {updated_plan}")
@@ -680,36 +588,9 @@ async def update_plan_failure(state: PentestState) -> dict[str, Any]:
     return await _update_plan_with_outcome(state, verdict=CheckVerdict.FAILURE)
 
 
-async def phase_transition_node(state: PentestState) -> dict[str, Any]:
-    current_phase = state["current_phase"]
-
-    if current_phase is None:
-        logger.warning("Current phase is None.")
-        raise RuntimeError("Current phase is required for phase transition.")
-
-    next_phase = current_phase.next()
-
-    log_execution_event(
-        event_type="phase_transition",
-        caller="PhaseTransition",
-        phase=current_phase,
-        message=f"Phase transition from {current_phase.value} to {next_phase.value if next_phase else 'END'}",
-    )
-
-    plan_key = _PHASE_PLAN_KEYS.get(current_phase)
-    if plan_key is None:
-        logger.warning("Unexpected phase value: %s", current_phase)
-        raise RuntimeError(f"Unsupported phase transition from {current_phase!r}.")
-
-    return {
-        plan_key: state["plan"],
-        "current_phase": next_phase,
-    }
-
 
 async def final_report(state: PentestState) -> dict[str, Any]:
     metrics = state["run_metrics"]
-    phase = state["current_phase"]
 
     async with mcp_tool_session(
         limit_scope_label="FinalReport",  # TODO maybe remover
@@ -727,7 +608,7 @@ async def final_report(state: PentestState) -> dict[str, Any]:
     messages = [
         SystemMessage(
             REPORT_PROMPT.format(
-                task_trees=_format_historical_task_trees(state),
+                task_tree=state["plan"],
                 credentials=credentials_result,
             )
         ),
@@ -740,7 +621,6 @@ async def final_report(state: PentestState) -> dict[str, Any]:
         agent,
         messages,
         metrics=metrics,
-        phase=phase,
         caller="Reporter",
     )
 

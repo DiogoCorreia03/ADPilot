@@ -4,14 +4,14 @@ from typing import Literal
 
 from .config import get_settings
 from .execution_logger import log_execution_event
-from .state import CheckVerdict, PentestState, Phase
+from .state import CheckVerdict, PentestState
 
 logger = logging.getLogger(__name__)
 
 
 def route_after_selector(
     state: PentestState,
-) -> Literal["ExploitNode", "SelectNextTask", "PhaseTransitionNode"]:
+) -> Literal["ExploitNode", "SelectNextTask", "FinalReport"]:
     """
     Routes to the next node after the SelectorNode based on the current state of the pentest.
     """
@@ -19,13 +19,13 @@ def route_after_selector(
     # SelectorNode will set the "next_task" field in the state based on the selected task.
     next_task = state["next_task"].strip() if state.get("next_task") else ""
 
-    # Check for phase completion signal (standalone token or surrounded by word boundary)
+    # Check for completion signal (standalone token or surrounded by word boundary)
     if (
         re.search(r"(?<!\w)\[?FINISHED\]?(?!\w)", next_task, re.IGNORECASE)
         or next_task.upper() == "[FINISHED]"
     ):
-        logger.info("Phase completion token detected (%s). Transitioning phase.", next_task)
-        route = "PhaseTransitionNode"  # Current phase is finished, transition to the next phase.
+        logger.info("Pentest completion token detected (%s). Terminating pentest.", next_task)
+        route = "FinalReport"
     elif next_task:
         route = "ExploitNode"  # There is a next task to perform, route to the ExploitNode to execute it.
     else:
@@ -34,7 +34,6 @@ def route_after_selector(
     log_execution_event(
         event_type="routing_decision",
         caller="Selector",
-        phase=state.get("current_phase"),
         input={"next_task": next_task},
         output=route,
     )
@@ -70,7 +69,6 @@ def route_after_check(
     log_execution_event(
         event_type="routing_decision",
         caller="Checker",
-        phase=state.get("current_phase"),
         input={
             "verdict": check_verdict.value if hasattr(check_verdict, "value") else str(check_verdict),
             "check_count": state.get("check_count"),
@@ -81,23 +79,3 @@ def route_after_check(
         level=logging.WARNING if route == "CheckNode" else logging.INFO,
     )
     return route
-
-
-def route_after_phase_transition(
-    state: PentestState,
-) -> Literal["InitialPlan", "FinalReport"]:
-    """
-    Routes to the next node after the PhaseTransitionNode based on the current phase of the pentest.
-    """
-    next_phase = state.get("current_phase")
-    phase_label = next_phase.name if (next_phase and hasattr(next_phase, "name")) else str(next_phase)
-
-    # Route to FinalReport if all phases completed (None) or legacy wrap-around to EXTERNAL_RECON
-    if next_phase is None or next_phase == Phase.EXTERNAL_RECON:
-        target = "FinalReport"
-        logger.info("All phases completed. Routing to FinalReport.")
-    else:
-        target = "InitialPlan"
-        logger.info("Transitioning to next phase: %s. Routing to InitialPlan.", phase_label)
-
-    return target

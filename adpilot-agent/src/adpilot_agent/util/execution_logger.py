@@ -41,7 +41,6 @@ class JSONLFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         event_type = getattr(record, "event_type", None)
         caller = getattr(record, "caller", None)
-        phase = getattr(record, "phase", None)
         inp = getattr(record, "input", None)
         out = getattr(record, "output", None)
 
@@ -51,7 +50,6 @@ class JSONLFormatter(logging.Formatter):
             if isinstance(record.msg, dict):
                 event_type = event_type or record.msg.get("event_type")
                 caller = caller or record.msg.get("caller")
-                phase = phase or record.msg.get("phase")
                 if inp is None:
                     inp = record.msg.get("input")
                 if out is None:
@@ -66,7 +64,6 @@ class JSONLFormatter(logging.Formatter):
             "timestamp": datetime.fromtimestamp(
                 record.created
             ).astimezone().isoformat(),
-            "phase": phase,
             "caller": caller,
             "event_type": event_type or "log",
             "input": inp,
@@ -98,7 +95,6 @@ def log_execution_event(
     event_type: str,
     *,
     caller: str | None = None,
-    phase: Any = None,
     input: Any = None,
     output: Any = None,
     message: str | None = None,
@@ -109,18 +105,11 @@ def log_execution_event(
     """
     Emits a structured event to the execution logger for analysis and LLM ingestion.
     """
-    if hasattr(phase, "value"):
-        phase_str = str(phase.value)
-    elif phase is not None:
-        phase_str = str(phase)
-    else:
-        phase_str = None
 
     target_logger = logger or logging.getLogger("execution")
     payload = {
         "event_type": event_type,
         "caller": caller,
-        "phase": phase_str,
         "input": input,
         "output": output,
         **extra,

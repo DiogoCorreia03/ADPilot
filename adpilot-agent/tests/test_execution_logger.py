@@ -88,12 +88,10 @@ def test_jsonl_formatter_extra_fields():
         args=(),
         exc_info=None,
     )
-    record.phase = "internal_recon"
     record.tool_name = "smbclient"
 
     formatted = formatter.format(record)
     data = json.loads(formatted)
-    assert data["phase"] == "internal_recon"
     assert data["tool_name"] == "smbclient"
 
 
@@ -188,7 +186,6 @@ def test_log_execution_event_llm_call(tmp_path: Path):
         log_execution_event(
             event_type="llm_call",
             caller="Planner",
-            phase="external_recon",
             input=prompts,
             output=response,
             model="gemini-2.5-flash",
@@ -202,7 +199,6 @@ def test_log_execution_event_llm_call(tmp_path: Path):
         entry = json.loads(lines[0])
         assert entry["event_type"] == "llm_call"
         assert entry["caller"] == "Planner"
-        assert entry["phase"] == "external_recon"
         assert entry["input"] == prompts
         assert entry["output"] == response
         assert entry["model"] == "gemini-2.5-flash"
@@ -224,7 +220,6 @@ def test_log_execution_event_tool_call_and_result(tmp_path: Path):
         log_execution_event(
             event_type="tool_call",
             caller="Executor",
-            phase="external_recon",
             input={"command": "nmap -sV 192.168.1.10"},
             output=None,
             tool="shell_exec",
@@ -233,7 +228,6 @@ def test_log_execution_event_tool_call_and_result(tmp_path: Path):
         log_execution_event(
             event_type="tool_result",
             caller="Executor",
-            phase="external_recon",
             input={"command": "nmap -sV 192.168.1.10"},
             output="Starting Nmap... 80/tcp open http",
             tool="shell_exec",
@@ -259,36 +253,6 @@ def test_log_execution_event_tool_call_and_result(tmp_path: Path):
         handler.close()
 
 
-def test_log_execution_event_phase_transition(tmp_path: Path):
-    from adpilot_agent.util.execution_logger import log_execution_event
-
-    log_file = tmp_path / "execution-phase.jsonl"
-    logger, handler = setup_execution_logger(log_file)
-
-    try:
-        log_execution_event(
-            event_type="phase_transition",
-            caller="PhaseTransition",
-            phase="external_recon",
-            input="external_recon",
-            output="initial_access",
-        )
-        handler.flush()
-
-        lines = log_file.read_text(encoding="utf-8").strip().splitlines()
-        assert len(lines) == 1
-
-        entry = json.loads(lines[0])
-        assert entry["event_type"] == "phase_transition"
-        assert entry["caller"] == "PhaseTransition"
-        assert entry["phase"] == "external_recon"
-        assert entry["input"] == "external_recon"
-        assert entry["output"] == "initial_access"
-    finally:
-        logger.removeHandler(handler)
-        handler.close()
-
-
 def test_jsonl_formatter_omits_none_fields():
     formatter = JSONLFormatter()
     record = logging.LogRecord(
@@ -302,7 +266,6 @@ def test_jsonl_formatter_omits_none_fields():
     )
     record.event_type = "tool_call"
     record.caller = "Executor"
-    record.phase = None
     record.input = {"command": "whoami"}
     record.output = None
     record.extra_none = None
@@ -322,7 +285,6 @@ def test_jsonl_formatter_omits_none_fields():
     assert data["extra_false"] is False
 
     # Fields with value None must not be present in the resulting json line
-    assert "phase" not in data
     assert "output" not in data
     assert "message" not in data
     assert "extra_none" not in data

@@ -52,7 +52,6 @@ def record_tool_result(
     result: Any,
     metrics: dict[str, Any] | None,
     limit_scope_label: str,
-    phase_name: str | None = None,
 ) -> None:
     if metrics is None:
         return
@@ -80,7 +79,6 @@ def record_tool_result(
 
     record_tool_call(
         metrics,
-        phase=phase_name,
         scope_label=limit_scope_label,
         is_error=is_error,
     )
@@ -174,7 +172,6 @@ def _build_tool_interceptor(
     tool_call_limit: int | None = None,
     same_tool_streak_limit: int | None = None,
     limit_scope_label: str = "MCPToolSession",
-    phase: str | None = None,
     metrics: dict[str, Any] | None = None,
 ) -> Callable[..., Any]:
     tool_calls_used = 0
@@ -185,9 +182,6 @@ def _build_tool_interceptor(
     async def _tool_interceptor(request: MCPToolCallRequest, handler):
         """Log tool calls before and after execution, optionally enforcing a per-session call limit."""
         nonlocal tool_calls_used, last_tool_name, same_tool_streak_count
-        phase_name = phase
-        if phase_name is None and request.headers:
-            phase_name = request.headers.get("pentest_phase")
 
         # Map limit scope to standard agent caller name
         scope_to_caller = {
@@ -203,7 +197,6 @@ def _build_tool_interceptor(
                 log_execution_event(
                     event_type="tool_limit",
                     caller=caller,
-                    phase=phase_name,
                     input={
                         "tool": request.name,
                         "args": request.args,
@@ -216,7 +209,6 @@ def _build_tool_interceptor(
                 if metrics is not None:
                     record_tool_call(
                         metrics,
-                        phase=phase_name,
                         scope_label=limit_scope_label,
                         is_error=True,
                     )
@@ -237,7 +229,6 @@ def _build_tool_interceptor(
                 log_execution_event(
                     event_type="tool_limit",
                     caller=caller,
-                    phase=phase_name,
                     input={
                         "tool": request.name,
                         "args": request.args,
@@ -253,7 +244,6 @@ def _build_tool_interceptor(
                 if metrics is not None:
                     record_tool_call(
                         metrics,
-                        phase=phase_name,
                         scope_label=limit_scope_label,
                         is_error=True,
                     )
@@ -274,7 +264,6 @@ def _build_tool_interceptor(
             log_execution_event(
                 event_type="tool_error",
                 caller=caller,
-                phase=phase_name,
                 input={
                     "tool": request.name,
                     "args": request.args,
@@ -287,14 +276,13 @@ def _build_tool_interceptor(
             if metrics is not None:
                 record_tool_call(
                     metrics,
-                    phase=phase_name,
                     scope_label=limit_scope_label,
                     is_error=True,
                 )
             return _format_tool_error(request, error)
 
         try:
-            record_tool_result(result, metrics, limit_scope_label, phase_name)
+            record_tool_result(result, metrics, limit_scope_label)
         except Exception:
             logger.warning("Failed to record tool result metrics")
 
@@ -308,7 +296,6 @@ def _build_tool_interceptor(
         log_execution_event(
             event_type="tool_call",
             caller=caller,
-            phase=phase_name,
             input={
                 "tool": request.name,
                 "args": request.args,
@@ -329,7 +316,6 @@ async def mcp_tool_session(
     same_tool_streak_limit: int | None = None,
     limit_scope_label: str = "MCPToolSession",
     extra_headers: dict[str, str] | None = None,
-    phase: str | None = None,
     metrics: dict[str, Any] | None = None,
 ) -> AsyncGenerator[list[Any]]:
     settings = get_settings()
@@ -337,7 +323,6 @@ async def mcp_tool_session(
         tool_call_limit=tool_call_limit,
         same_tool_streak_limit=same_tool_streak_limit,
         limit_scope_label=limit_scope_label,
-        phase=phase,
         metrics=metrics,
     )
 
