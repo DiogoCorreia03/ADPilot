@@ -346,7 +346,7 @@ async def create_initial_plan(state: PentestState) -> dict[str, Any]:
             )
         ),
         HumanMessage(
-            "Provide the hierarchical task plan as answer. Break down the overall objective into smaller tasks and subtasks. Do not include a title or an appendix." # TODO confirmar que é melhor assim ou só HuamnMessage com build_plan_prompt
+            "Provide the hierarchical task plan as answer. Break down the overall objective into smaller tasks and subtasks. Do not include a title or an appendix."
         ),
     ]
 

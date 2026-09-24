@@ -27,6 +27,7 @@ from .util import (
     route_after_check,
     route_after_selector,
     route_after_phase_transition,
+    setup_execution_logger,
 )
 from .util.nodes import (
     check_node,
@@ -62,14 +63,11 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
-execution_handler = logging.FileHandler(executionFolder / f"execution-{t}.log", mode="w") # TODO maybe use JSONL, see https://gemini.google.com/app/34eebd6d8fb67db3
-execution_handler.setLevel(logging.INFO)
-execution_handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
-execution_logger = logging.getLogger("execution")
-execution_logger.setLevel(logging.INFO)
-execution_logger.addHandler(execution_handler)
+execution_logger, execution_handler = setup_execution_logger(
+    executionFolder / f"execution-{t}.jsonl"
+)
 
-
+# TODO restruturar divisão entre SystemMessage e HumanMessage: https://share.gemini.google/iAlgJQuBIgYk
 
 async def async_main():
     loop = asyncio.get_running_loop()
