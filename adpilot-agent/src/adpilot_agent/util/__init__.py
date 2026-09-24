@@ -8,7 +8,7 @@ from .routers import (
     route_after_phase_transition,
 )
 from .exceptions import InvalidLLMResponseError, EmptyLLMResponseError, LLMError
-from .execution_logger import JSONLFormatter, setup_execution_logger
+from .execution_logger import JSONLFormatter, log_execution_event, setup_execution_logger
 
 __all__ = [
     "Settings",
@@ -30,5 +30,6 @@ __all__ = [
     "EmptyLLMResponseError",
     "LLMError",
     "JSONLFormatter",
+    "log_execution_event",
     "setup_execution_logger",
 ]

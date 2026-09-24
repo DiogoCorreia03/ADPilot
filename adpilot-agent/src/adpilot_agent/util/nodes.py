@@ -21,6 +21,7 @@ from ..prompts import (
 from .exceptions import InvalidLLMResponseError, EmptyLLMResponseError
 
 from .config import get_settings
+from .execution_logger import log_execution_event
 from .mcp_session import list_tools, mcp_tool_session
 from .metrics import record_exploit_node_run, record_token_usage
 from .models import get_agent
@@ -28,9 +29,9 @@ from .state import CheckVerdict, PentestState, Phase
 
 # Set up logging
 logger = logging.getLogger(__name__)
-execution_logger = logging.getLogger("execution")
 
 
+# ! needs to be the same as the ones in the MCP Server
 _PHASE_PLAN_KEYS: dict[Phase, str] = {
     Phase.EXTERNAL_RECON: "external_recon_plan",
     Phase.INITIAL_ACCESS: "initial_access_plan",
@@ -39,7 +40,7 @@ _PHASE_PLAN_KEYS: dict[Phase, str] = {
 }
 
 # ! needs to be the same as the one in the MCP Server
-AGENT_PHASE_HEADER = "pentest_phase" # todo put in .env/config.py
+AGENT_PHASE_HEADER = "pentest_phase"  # todo put in .env/config.py
 
 
 def _format_historical_task_trees(state: PentestState) -> str:
@@ -48,7 +49,10 @@ def _format_historical_task_trees(state: PentestState) -> str:
         ("External Reconnaissance Phase", state.get("external_recon_plan", "")),
         ("Initial Access Phase", state.get("initial_access_plan", "")),
         ("Internal Reconnaissance Phase", state.get("internal_recon_plan", "")),
-        ("Lateral Movement & Privilege Escalation Phase", state.get("lateral_privesc_plan", "")),
+        (
+            "Lateral Movement & Privilege Escalation Phase",
+            state.get("lateral_privesc_plan", ""),
+        ),
     ]
     formatted = []
     for title, plan in phase_sections:
@@ -95,16 +99,13 @@ def _extract_token_usage(
         logger.debug("Hybrid/multi-model usage metadata detected: %s", usage_metadata)
         return {
             "input_tokens": sum(
-                int(m.get("input_tokens", 0) or 0)
-                for m in usage_metadata.values()
+                int(m.get("input_tokens", 0) or 0) for m in usage_metadata.values()
             ),
             "output_tokens": sum(
-                int(m.get("output_tokens", 0) or 0)
-                for m in usage_metadata.values()
+                int(m.get("output_tokens", 0) or 0) for m in usage_metadata.values()
             ),
             "total_tokens": sum(
-                int(m.get("total_tokens", 0) or 0)
-                for m in usage_metadata.values()
+                int(m.get("total_tokens", 0) or 0) for m in usage_metadata.values()
             ),
         }
 
@@ -142,11 +143,15 @@ def _extract_text_content(content: Any) -> str:
                 elif "content" in part and isinstance(part["content"], str):
                     parts.append(part["content"])
                 else:
-                    logger.warning("Skipping non-text content part in message: %s", part)
+                    logger.warning(
+                        "Skipping non-text content part in message: %s", part
+                    )
             elif hasattr(part, "text") and isinstance(part.text, str):
                 parts.append(part.text)
             else:
-                logger.warning("Skipping unhandled content part type: %s", type(part).__name__)
+                logger.warning(
+                    "Skipping unhandled content part type: %s", type(part).__name__
+                )
         text = "".join(parts)
     else:
         raise InvalidLLMResponseError(
@@ -177,6 +182,7 @@ async def _invoke_agent_once(
     *,
     metrics: dict[str, Any],
     phase: Phase | None,
+    caller: str = "Agent",
 ) -> str:
     """Execute a single agent invocation pass, record token metrics, and return extracted text content."""
     settings = get_settings()
@@ -196,17 +202,25 @@ async def _invoke_agent_once(
 
     message = _extract_ai_message(result)
     response = _extract_text_content(message.content)
-    
-    # TODO confirm it works
-    messages = result.get("messages", [])
+
+    messages = result.get("messages", []) if isinstance(result, dict) else messages
     prompts = [m for m in messages if not isinstance(m, AIMessage)]
-    lines = ["================================= PROMPT =================================",]
-    for msg in prompts:
-        lines.append(f"\n{_extract_text_content(msg.content)}")
-    lines.append("================================ RESPONSE ================================")
-    lines.append(f"{response}")
-    execution_logger.info("\n".join(lines))
-    
+    serialized_prompts = [
+        {
+            "role": getattr(m, "type", "user"),
+            "content": _extract_text_content(getattr(m, "content", str(m))),
+        }
+        for m in prompts
+    ]
+
+    log_execution_event(
+        event_type="llm_call",
+        caller=caller,
+        phase=phase,
+        input=serialized_prompts,
+        output=response,
+    )
+
     return response
 
 
@@ -216,6 +230,7 @@ async def _invoke_agent_with_retries(
     *,
     metrics: dict[str, Any],
     phase: Phase | None,
+    caller: str = "Agent",
     max_attempts: int | None = None,
 ) -> str:
     """Retry agent invocation with exponential backoff in case of exceptions."""
@@ -231,15 +246,17 @@ async def _invoke_agent_with_retries(
                 messages,
                 metrics=metrics,
                 phase=phase,
+                caller=caller,
             )
         except Exception as error:
             # If we get here, the exception did not come from tool execution (handled by interceptor),
             # but rather from the agent invocation itself (e.g. LLM timeout, formatting issues).
-            execution_logger.info(
-                "Agent invocation failed (attempt %s/%s): %s",
-                attempt,
-                attempts_limit,
-                error,
+            log_execution_event(
+                event_type="llm_error",
+                caller=caller,
+                phase=phase,
+                message=f"Agent invocation failed for {caller} (attempt {attempt}/{attempts_limit}): {error}",
+                level=logging.WARNING if attempt < attempts_limit else logging.ERROR,
             )
 
             # If this was the last allowed attempt, re-raise the exception.
@@ -247,11 +264,11 @@ async def _invoke_agent_with_retries(
                 raise
 
             delay = _compute_retry_delay(attempt, base_delay, max_delay)
-            execution_logger.info(
-                "Retrying agent invocation in %.2f seconds (attempt %s/%s).",
-                delay,
-                attempt + 1,
-                attempts_limit,
+            log_execution_event(
+                event_type="llm_retry",
+                caller=caller,
+                phase=phase,
+                message=f"Retrying agent invocation for {caller} in {delay:.2f} seconds (attempt {attempt + 1}/{attempts_limit}).",
             )
             await asyncio.sleep(delay)
 
@@ -267,12 +284,13 @@ async def initial_scan(state: PentestState) -> dict[str, Any]:
     metrics = state["run_metrics"]
 
     async with mcp_tool_session(
-        extra_headers={AGENT_PHASE_HEADER: "shell_only"}, # TODO meter no .env/config.py
+        limit_scope_label="InitialScan",
+        extra_headers={
+            AGENT_PHASE_HEADER: "shell_only"
+        },  # TODO meter no .env/config.py
         phase=phase.value,
         metrics=metrics,
     ) as tools:
-        execution_logger.info(f"Loaded tools for phase {phase.value}:\n{list_tools(tools)}")
-
         shell_tool = next((t for t in tools if "shell_exec" in t.name), None)
         if shell_tool is None:
             logger.error("Shell tool not found among loaded tools.")
@@ -301,6 +319,7 @@ async def initial_scan(state: PentestState) -> dict[str, Any]:
         messages,
         metrics=metrics,
         phase=phase,
+        caller="InitialScan",
     )
     logger.debug(f"Initial scan analysis result:\n{scan_result}")
 
@@ -333,6 +352,13 @@ async def create_initial_plan(state: PentestState) -> dict[str, Any]:
     ) as tools:
         tools_str = list_tools(tools)
 
+    log_execution_event(
+        event_type="tools_loaded",
+        phase=phase,
+        message=f"Loaded {len(tools)} tools for phase {phase.value}: {', '.join([getattr(t, 'name', str(t)) for t in tools])}",
+        tools=tools_str,
+    )
+
     messages = [
         SystemMessage(
             build_plan_prompt(
@@ -359,6 +385,7 @@ async def create_initial_plan(state: PentestState) -> dict[str, Any]:
         messages,
         metrics=metrics,
         phase=phase,
+        caller="Planner",
     )
     logger.info(f"Initial plan created:\n{plan}")
 
@@ -419,6 +446,7 @@ async def select_next_task(state: PentestState) -> dict[str, Any]:
         messages,
         metrics=metrics,
         phase=phase,
+        caller="Selector",
     )
     logger.info(f"Selected next task: {next_task}")
 
@@ -478,6 +506,7 @@ async def exploit_node(state: PentestState) -> dict[str, Any]:
             messages,
             metrics=metrics,
             phase=phase,
+            caller="Executor",
         )
         logger.info(f"Exploit output: {exploit_output}")
 
@@ -521,6 +550,7 @@ async def check_node(state: PentestState) -> dict[str, Any]:
             messages,
             metrics=metrics,
             phase=phase,
+            caller="Checker",
         )
 
     logger.info(f"Check output: {check_output}")
@@ -570,7 +600,7 @@ def _parse_check_verdict(check_output: str) -> CheckVerdict:
         return CheckVerdict.SUCCESS
 
     logger.warning("Unable to parse checker verdict. Defaulting to failure.")
-    return CheckVerdict.FAILURE # TODO maybe default to RETRY instead of FAILURE, to avoid skipping tasks that might be recoverable, perguntar
+    return CheckVerdict.FAILURE  # TODO maybe default to RETRY instead of FAILURE, to avoid skipping tasks that might be recoverable, perguntar
 
 
 async def _update_plan_with_outcome(
@@ -632,6 +662,7 @@ async def _update_plan_with_outcome(
         messages,
         metrics=metrics,
         phase=phase,
+        caller="Updater",
     )
     logger.info(f"Updated plan: {updated_plan}")
 
@@ -658,6 +689,13 @@ async def phase_transition_node(state: PentestState) -> dict[str, Any]:
 
     next_phase = current_phase.next()
 
+    log_execution_event(
+        event_type="phase_transition",
+        caller="PhaseTransition",
+        phase=current_phase,
+        message=f"Phase transition from {current_phase.value} to {next_phase.value if next_phase else 'END'}",
+    )
+
     plan_key = _PHASE_PLAN_KEYS.get(current_phase)
     if plan_key is None:
         logger.warning("Unexpected phase value: %s", current_phase)
@@ -674,8 +712,8 @@ async def final_report(state: PentestState) -> dict[str, Any]:
     phase = state["current_phase"]
 
     async with mcp_tool_session(
-        limit_scope_label="FinalReport", # TODO maybe remover
-        metrics=metrics, # TODO maybe remover
+        limit_scope_label="FinalReport",  # TODO maybe remover
+        metrics=metrics,  # TODO maybe remover
     ) as tools:
         credentials_result = ""
         credentials_tool = next((t for t in tools if "credentials_get" in t.name), None)
@@ -703,12 +741,15 @@ async def final_report(state: PentestState) -> dict[str, Any]:
         messages,
         metrics=metrics,
         phase=phase,
+        caller="Reporter",
     )
 
     sanitized_model = re.sub(r"[^\w\-.]", "_", get_settings().MODEL_NAME)
     base_dir = Path(__file__).resolve().parent.parent.parent
     report_path = (
-        base_dir / "reports" / f"{sanitized_model}-{time.strftime('%Y-%m-%d_%H-%M-%S')}.md"
+        base_dir
+        / "reports"
+        / f"{sanitized_model}-{time.strftime('%Y-%m-%d_%H-%M-%S')}.md"
     )
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(final_report, encoding="utf-8")

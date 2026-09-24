@@ -5,44 +5,32 @@ from pathlib import Path
 import time
 from typing import Any
 
-# Standard LogRecord attributes to ignore when extracting custom extra fields
-STANDARD_RECORD_ATTRS = {
-    "args",
-    "asctime",
-    "created",
-    "exc_info",
-    "exc_text",
-    "filename",
-    "funcName",
-    "levelname",
-    "levelno",
-    "lineno",
-    "message",
-    "module",
-    "msecs",
-    "msg",
-    "name",
-    "pathname",
-    "process",
-    "processName",
-    "relativeCreated",
-    "stack_info",
-    "taskName",
-    "thread",
-    "threadName",
-}
-
 
 class JSONLFormatter(logging.Formatter):
     """
     Formats log records as JSON lines (JSONL).
-    Each line emitted is a single valid JSON object.
+    Each line emitted is a single valid JSON object structured for machine and LLM ingestion.
     """
 
     def format(self, record: logging.LogRecord) -> str:
-        # If msg is a dict or list (and no formatting args), preserve structure
+        event_type = getattr(record, "event_type", None)
+        caller = getattr(record, "caller", None)
+        phase = getattr(record, "phase", None)
+        inp = getattr(record, "input", None)
+        out = getattr(record, "output", None)
+
         if isinstance(record.msg, (dict, list)) and not record.args:
-            message: Any = record.msg
+            if isinstance(record.msg, dict):
+                event_type = event_type or record.msg.get("event_type")
+                caller = caller or record.msg.get("caller")
+                phase = phase or record.msg.get("phase")
+                if inp is None:
+                    inp = record.msg.get("input")
+                if out is None:
+                    out = record.msg.get("output")
+                message = record.msg.get("message", record.msg)
+            else:
+                message = record.msg
         else:
             message = record.getMessage()
 
@@ -50,14 +38,13 @@ class JSONLFormatter(logging.Formatter):
             "timestamp": datetime.fromtimestamp(
                 record.created
             ).astimezone().isoformat(),
-            "name": record.name,
+            "phase": phase,
+            "caller": caller,
+            "event_type": event_type or "log",
+            "input": inp,
+            "output": out,
             "message": message,
         }
-
-        # Include custom extra fields passed via extra={...}
-        for key, value in record.__dict__.items():
-            if key not in STANDARD_RECORD_ATTRS and not key.startswith("_"):
-                entry[key] = value
 
         if record.exc_info:
             entry["exception"] = self.formatException(record.exc_info)
@@ -65,6 +52,40 @@ class JSONLFormatter(logging.Formatter):
             entry["stack_info"] = self.formatStack(record.stack_info)
 
         return json.dumps(entry, default=str, ensure_ascii=False)
+
+
+def log_execution_event(
+    event_type: str,
+    *,
+    caller: str | None = None,
+    phase: Any = None,
+    input: Any = None,
+    output: Any = None,
+    message: str | None = "",
+    level: int = logging.INFO,
+    logger: logging.Logger | None = None,
+    **extra: Any,
+) -> None:
+    """
+    Emits a structured event to the execution logger for analysis and LLM ingestion.
+    """
+    if hasattr(phase, "value"):
+        phase_str = str(phase.value)
+    elif phase is not None:
+        phase_str = str(phase)
+    else:
+        phase_str = None
+
+    target_logger = logger or logging.getLogger("execution")
+    payload = {
+        "event_type": event_type,
+        "caller": caller,
+        "phase": phase_str,
+        "input": input,
+        "output": output,
+        **extra,
+    }
+    target_logger.log(level, message, extra=payload)
 
 
 def setup_execution_logger(
