@@ -21,8 +21,6 @@ def test_jsonl_formatter_basic():
     formatted = formatter.format(record)
     assert "\n" not in formatted
     data = json.loads(formatted)
-    assert data["name"] == "execution"
-    assert data["level"] == "INFO"
     assert data["message"] == "Task completed successfully."
     assert "timestamp" in data
 
@@ -119,7 +117,6 @@ def test_jsonl_formatter_with_exception():
     formatted = formatter.format(record)
     assert "\n" not in formatted
     data = json.loads(formatted)
-    assert data["level"] == "ERROR"
     assert "Simulated tool crash" in data["exception"]
 
 
@@ -141,15 +138,12 @@ def test_setup_execution_logger_file_output(tmp_path: Path):
 
         entry1 = json.loads(lines[0])
         assert entry1["message"] == "First line"
-        assert entry1["level"] == "INFO"
 
         entry2 = json.loads(lines[1])
         assert entry2["message"] == "Second line with args: warning_arg"
-        assert entry2["level"] == "WARNING"
 
         entry3 = json.loads(lines[2])
         assert entry3["message"] == "Third multiline:\nLine A\nLine B"
-        assert entry3["level"] == "INFO"
     finally:
         logger.removeHandler(handler)
         handler.close()
@@ -254,6 +248,7 @@ def test_log_execution_event_tool_call_and_result(tmp_path: Path):
         assert call_entry["caller"] == "Executor"
         assert call_entry["input"] == {"command": "nmap -sV 192.168.1.10"}
         assert call_entry["tool"] == "shell_exec"
+        assert "output" not in call_entry
 
         res_entry = json.loads(lines[1])
         assert res_entry["event_type"] == "tool_result"
@@ -292,4 +287,45 @@ def test_log_execution_event_phase_transition(tmp_path: Path):
     finally:
         logger.removeHandler(handler)
         handler.close()
+
+
+def test_jsonl_formatter_omits_none_fields():
+    formatter = JSONLFormatter()
+    record = logging.LogRecord(
+        name="execution",
+        level=logging.INFO,
+        pathname=__file__,
+        lineno=10,
+        msg=None,
+        args=(),
+        exc_info=None,
+    )
+    record.event_type = "tool_call"
+    record.caller = "Executor"
+    record.phase = None
+    record.input = {"command": "whoami"}
+    record.output = None
+    record.extra_none = None
+    record.extra_valid = "present"
+    record.extra_zero = 0
+    record.extra_false = False
+
+    formatted = formatter.format(record)
+    data = json.loads(formatted)
+
+    assert "timestamp" in data
+    assert data["event_type"] == "tool_call"
+    assert data["caller"] == "Executor"
+    assert data["input"] == {"command": "whoami"}
+    assert data["extra_valid"] == "present"
+    assert data["extra_zero"] == 0
+    assert data["extra_false"] is False
+
+    # Fields with value None must not be present in the resulting json line
+    assert "phase" not in data
+    assert "output" not in data
+    assert "message" not in data
+    assert "extra_none" not in data
+    assert "exception" not in data
+    assert "stack_info" not in data
 

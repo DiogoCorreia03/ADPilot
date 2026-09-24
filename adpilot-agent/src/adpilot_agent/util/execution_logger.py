@@ -5,6 +5,32 @@ from pathlib import Path
 import time
 from typing import Any
 
+STANDARD_RECORD_ATTRS = {
+    "args",
+    "asctime",
+    "created",
+    "exc_info",
+    "exc_text",
+    "filename",
+    "funcName",
+    "levelname",
+    "levelno",
+    "lineno",
+    "message",
+    "module",
+    "msecs",
+    "msg",
+    "name",
+    "pathname",
+    "process",
+    "processName",
+    "relativeCreated",
+    "stack_info",
+    "taskName",
+    "thread",
+    "threadName",
+}
+
 
 class JSONLFormatter(logging.Formatter):
     """
@@ -19,7 +45,9 @@ class JSONLFormatter(logging.Formatter):
         inp = getattr(record, "input", None)
         out = getattr(record, "output", None)
 
-        if isinstance(record.msg, (dict, list)) and not record.args:
+        if record.msg is None:
+            message = None
+        elif isinstance(record.msg, (dict, list)) and not record.args:
             if isinstance(record.msg, dict):
                 event_type = event_type or record.msg.get("event_type")
                 caller = caller or record.msg.get("caller")
@@ -46,10 +74,22 @@ class JSONLFormatter(logging.Formatter):
             "message": message,
         }
 
+        # Include custom extra fields passed via extra={...}
+        for key, value in record.__dict__.items():
+            if (
+                key not in STANDARD_RECORD_ATTRS
+                and key not in entry
+                and not key.startswith("_")
+            ):
+                entry[key] = value
+
         if record.exc_info:
             entry["exception"] = self.formatException(record.exc_info)
         if record.stack_info:
             entry["stack_info"] = self.formatStack(record.stack_info)
+
+        # Omit any field whose value is None
+        entry = {k: v for k, v in entry.items() if v is not None}
 
         return json.dumps(entry, default=str, ensure_ascii=False)
 
@@ -61,7 +101,7 @@ def log_execution_event(
     phase: Any = None,
     input: Any = None,
     output: Any = None,
-    message: str | None = "",
+    message: str | None = None,
     level: int = logging.INFO,
     logger: logging.Logger | None = None,
     **extra: Any,
