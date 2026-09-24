@@ -38,11 +38,11 @@ def test_build_plan_prompt_initial_access():
         ignored_hosts="10.0.0.2",
         scan_results="Nmap scan: 445 open",
         tools="Tool 1",
-        previous_task_trees="1.1 [DONE] Anonymous SMB",
+        previous_task_trees="1.1 [SUCCESS] Anonymous SMB",
     )
     assert "Gaining Initial Access" in prompt
     assert "<previous_task_trees>" in prompt
-    assert "1.1 [DONE] Anonymous SMB" in prompt
+    assert "1.1 [SUCCESS] Anonymous SMB" in prompt
     # Initial access should not include network scan results
     assert "<scan_results>" not in prompt
     assert "Nmap scan: 445 open" not in prompt

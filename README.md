@@ -319,7 +319,7 @@ During and after an assessment, ADPilot maintains structured audit trails:
 
 - **Assessment Reports (`adpilot-agent/reports/`)**: Complete client-ready Markdown reports synthesized by the `FinalReport` agent, containing executive summaries, discovered vulnerabilities, compromised accounts, and remediation recommendations.
 - **Application Run Logs (`adpilot-agent/logs/`)**: Timestamped logs (`run-<timestamp>.log`) recording state changes, agent routing decisions, and MCP communications.
-- **Execution Telemetry (`adpilot-agent/executions/`)**: Raw prompt/response interactions and tool invocation logs (`execution-<timestamp>.log`).
+- **Execution Telemetry (`adpilot-agent/executions/`)**: Raw prompt/response interactions and tool invocation logs (`execution-<timestamp>.jsonl`).
 - **Performance Summaries**: Per-phase metrics tracking tool invocations, error frequencies, and token consumption printed at the conclusion of each run.
 
 ---

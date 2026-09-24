@@ -3,10 +3,10 @@ import re
 from typing import Literal
 
 from .config import get_settings
+from .execution_logger import log_execution_event
 from .state import CheckVerdict, PentestState, Phase
 
 logger = logging.getLogger(__name__)
-execution_logger = logging.getLogger("execution")
 
 
 def route_after_selector(
@@ -25,11 +25,20 @@ def route_after_selector(
         or next_task.upper() == "[FINISHED]"
     ):
         logger.info("Phase completion token detected (%s). Transitioning phase.", next_task)
-        return "PhaseTransitionNode"  # Current phase is finished, transition to the next phase.
+        route = "PhaseTransitionNode"  # Current phase is finished, transition to the next phase.
     elif next_task:
-        return "ExploitNode"  # There is a next task to perform, route to the ExploitNode to execute it.
+        route = "ExploitNode"  # There is a next task to perform, route to the ExploitNode to execute it.
     else:
-        return "SelectNextTask"  # No next task was selected, route back to the SelectorNode to select a different task.
+        route = "SelectNextTask"  # No next task was selected, route back to the SelectorNode to select a different task.
+
+    log_execution_event(
+        event_type="routing_decision",
+        caller="Selector",
+        phase=state.get("current_phase"),
+        input={"next_task": next_task},
+        output=route,
+    )
+    return route
 
 
 def route_after_check(
@@ -42,31 +51,36 @@ def route_after_check(
     max_retries = get_settings().CHECK_MAX_RETRIES
 
     if check_verdict == CheckVerdict.SUCCESS:
-        execution_logger.info("Task marked as successful. Proceeding to update the plan.")
-        return "UpdatePlanSuccess"
-
+        route = "UpdatePlanSuccess"
+        msg = "Task marked as successful. Proceeding to update the plan."
     elif check_verdict == CheckVerdict.RETRY:
         if state["check_count"] > max_retries:
-            execution_logger.info(
-                "Task has been retried %s times. Marking as failed and moving on to the next task.",
-                state["check_count"],
-            )
-            return "UpdatePlanFailure"
-
-        execution_logger.info("Task marked for retry. Will attempt exploitation again.")
-        return "ExploitNode"
-
+            route = "UpdatePlanFailure"
+            msg = f"Task has been retried {state['check_count']} times. Marking as failed and moving on to the next task."
+        else:
+            route = "ExploitNode"
+            msg = "Task marked for retry. Will attempt exploitation again."
     elif check_verdict == CheckVerdict.FAILURE:
-        execution_logger.info(
-            "Task marked as failed. Proceeding to update the plan."
-        )
-        return "UpdatePlanFailure"
-
+        route = "UpdatePlanFailure"
+        msg = "Task marked as failed. Proceeding to update the plan."
     else:
-        execution_logger.warning(
-            "Unexpected CheckNode output format. Defaulting to retrying the check."
-        )
-        return "CheckNode"
+        route = "CheckNode"
+        msg = "Unexpected CheckNode output format. Defaulting to retrying the check."
+
+    log_execution_event(
+        event_type="routing_decision",
+        caller="Checker",
+        phase=state.get("current_phase"),
+        input={
+            "verdict": check_verdict.value if hasattr(check_verdict, "value") else str(check_verdict),
+            "check_count": state.get("check_count"),
+            "max_retries": max_retries,
+        },
+        output=route,
+        message=msg,
+        level=logging.WARNING if route == "CheckNode" else logging.INFO,
+    )
+    return route
 
 
 def route_after_phase_transition(
@@ -77,12 +91,13 @@ def route_after_phase_transition(
     """
     next_phase = state.get("current_phase")
     phase_label = next_phase.name if (next_phase and hasattr(next_phase, "name")) else str(next_phase)
-    execution_logger.info("Transitioning to next phase: %s", phase_label) # TODO maybe print FinalReport if next_phase is None
 
     # Route to FinalReport if all phases completed (None) or legacy wrap-around to EXTERNAL_RECON
     if next_phase is None or next_phase == Phase.EXTERNAL_RECON:
+        target = "FinalReport"
         logger.info("All phases completed. Routing to FinalReport.")
-        return "FinalReport"
+    else:
+        target = "InitialPlan"
+        logger.info("Transitioning to next phase: %s. Routing to InitialPlan.", phase_label)
 
-    logger.info("Transitioning to next phase: %s. Routing to InitialPlan.", phase_label)
-    return "InitialPlan"
+    return target

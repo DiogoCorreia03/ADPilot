@@ -27,16 +27,16 @@ def test_extract_tool_text():
 
 def test_format_historical_task_trees_with_headers():
     state: PentestState = {
-        "external_recon_plan": "1.1. [DONE] Port scan",
-        "initial_access_plan": "2.1. [DONE] AS-REP roast",
+        "external_recon_plan": "1.1. [SUCCESS] Port scan",
+        "initial_access_plan": "2.1. [SUCCESS] AS-REP roast",
         "internal_recon_plan": "",
         "lateral_privesc_plan": "",
     } # type: ignore
     formatted = _format_historical_task_trees(state)
     assert "### External Reconnaissance Phase" in formatted
-    assert "1.1. [DONE] Port scan" in formatted
+    assert "1.1. [SUCCESS] Port scan" in formatted
     assert "### Initial Access Phase" in formatted
-    assert "2.1. [DONE] AS-REP roast" in formatted
+    assert "2.1. [SUCCESS] AS-REP roast" in formatted
     assert "Internal Reconnaissance" not in formatted
 
 
