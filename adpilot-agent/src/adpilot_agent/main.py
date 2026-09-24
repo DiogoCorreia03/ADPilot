@@ -1,3 +1,4 @@
+import re
 import sys
 from pathlib import Path
 
@@ -17,9 +18,11 @@ import time
 
 from langchain.messages import HumanMessage, SystemMessage
 
+from .prompts import build_big_prompt
 from .util import (
     get_agent,
     get_settings,
+    list_tools,
     mcp_tool_session,
     setup_execution_logger,
 )
@@ -57,37 +60,53 @@ AGENT_PHASE_HEADER = "pentest_phase"  # todo put in .env/config.py
 
 async def async_main():
     start_time = time.perf_counter()
+    metrics = new_run_metrics()
 
     try:
-        metrics = new_run_metrics()
         async with mcp_tool_session(
             # extra_headers={AGENT_PHASE_HEADER: "shell_only"}, # use when you want only shell tool
+            same_tool_streak_limit=settings.EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW,
             metrics=metrics,
         ) as tools:
             agent = get_agent(tools=tools)
-            # TODO queremos este llm simples a gerar um report no fim ou só olhamos para os execution logs?
 
             messages = [
-                SystemMessage(),  # TODO prompt gigante
-                HumanMessage(),
+                SystemMessage(
+                    build_big_prompt(
+                        dc_ip=settings.DC_IP,
+                        network=settings.NETWORK,
+                        ignored_hosts=str(settings.IGNORED_HOSTS),
+                        tools=list_tools(tools),
+                    )
+                ),
+                HumanMessage("Start the penetration test as specified in the prompt."),
             ]
 
-        try:
-            return await invoke_agent_once(
-                agent,
-                messages,
-                metrics=metrics,
-            )
-        except Exception as error:
-            # If we get here, the exception did not come from tool execution (handled by interceptor),
-            # but rather from the agent invocation itself (e.g. LLM timeout, formatting issues).
-            execution_logger.info(
-                "Agent invocation failed: %s",
-                error,
-            )
+            try:
+                result = await invoke_agent_once(
+                    agent,
+                    messages,
+                    metrics=metrics,
+                )
 
-        print(format_run_summary(metrics))
+                sanitized_model = re.sub(r"[^\w\-.]", "_", get_settings().MODEL_NAME)
+                report_path = (
+                    BASE_DIR
+                    / "reports"
+                    / f"{sanitized_model}-{time.strftime('%Y-%m-%d_%H-%M-%S')}.md"
+                )
+                report_path.parent.mkdir(parents=True, exist_ok=True)
+                report_path.write_text(result, encoding="utf-8")
+
+            except Exception as error:
+                # If we get here, the exception did not come from tool execution (handled by interceptor),
+                # but rather from the agent invocation itself (e.g. LLM timeout, formatting issues).
+                execution_logger.info(
+                    "Agent invocation failed: %s",
+                    error,
+                )
     finally:
+        print(format_run_summary(metrics))
         elapsed_seconds = time.perf_counter() - start_time
         print(f"Execution time: {elapsed_seconds:.2f}s")
 

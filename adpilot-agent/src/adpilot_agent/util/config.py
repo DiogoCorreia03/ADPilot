@@ -35,8 +35,8 @@ class Settings(BaseSettings):
 
     ATTACKER_MACHINE_AUTH_TOKEN: SecretStr
     ATTACKER_MACHINE_URL: HttpUrl
-    EXPLOIT_MAX_TOOL_CALLS: int = 10
-    EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW: int = 5
+    EXPLOIT_MAX_TOOL_CALLS: int = 15
+    EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW: int = 10
     IGNORED_HOSTS: list[str] | str = Field(
         default_factory=lambda: ["192.168.122.1", "192.168.122.2", "192.168.122.57"]
     )

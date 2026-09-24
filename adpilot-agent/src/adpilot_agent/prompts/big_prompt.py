@@ -15,7 +15,7 @@ Domain Controller (focus of the pentest):
 Target Network:
 {network}
 
-Ignored Hosts:
+Ignored Hosts (really ignore these hosts, do not scan or attack them):
 {ignored_hosts}
 
 Wordlists available:
