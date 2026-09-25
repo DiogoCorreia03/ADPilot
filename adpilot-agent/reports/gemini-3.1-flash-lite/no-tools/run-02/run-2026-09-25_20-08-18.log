@@ -1,0 +1,86 @@
+2026-09-25 20:08:19,153 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:08:19,154 - mcp.client.streamable_http - INFO - Received session ID: ec11a2118e6f44e6bd1866d1b985336c
+2026-09-25 20:08:19,155 - mcp.client.streamable_http - INFO - Negotiated protocol version: 2025-11-25
+2026-09-25 20:08:19,391 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 202 Accepted"
+2026-09-25 20:08:19,620 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:08:19,622 - execution - INFO - Loaded 1 tools: shell_exec
+2026-09-25 20:08:20,406 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:08:20,774 - google.auth._default - WARNING - No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+2026-09-25 20:08:22,020 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:09:51,847 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:09:51,849 - execution - INFO - None
+2026-09-25 20:09:51,855 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:09:52,640 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:09:53,807 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:09:53,809 - execution - INFO - None
+2026-09-25 20:09:53,813 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:09:54,523 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:09:55,095 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:09:55,096 - execution - INFO - None
+2026-09-25 20:09:55,102 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:09:55,847 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:09:56,431 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:09:56,433 - execution - INFO - None
+2026-09-25 20:09:56,436 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:09:57,070 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:09:58,210 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:09:58,212 - execution - INFO - None
+2026-09-25 20:09:58,217 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:09:58,964 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:09:59,171 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:09:59,172 - execution - INFO - None
+2026-09-25 20:09:59,176 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:09:59,886 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:00,495 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:10:00,496 - execution - INFO - None
+2026-09-25 20:10:00,500 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:01,289 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:01,506 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:10:01,507 - execution - INFO - None
+2026-09-25 20:10:01,511 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:02,270 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:02,490 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:10:02,492 - execution - INFO - None
+2026-09-25 20:10:02,499 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:03,222 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:03,421 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:10:03,422 - execution - INFO - None
+2026-09-25 20:10:03,425 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:04,209 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:04,213 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:04,216 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:05,142 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:05,146 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:05,150 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:05,872 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:05,877 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:05,880 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:06,471 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:06,476 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:06,478 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:07,337 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:07,341 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:07,344 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:07,997 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:08,006 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:08,014 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:08,708 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:08,712 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:08,717 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:09,369 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:09,377 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:09,384 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:10,175 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:10,182 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:10,189 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:11,075 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:11,080 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:11,083 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:11,890 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:11,897 - execution - INFO - Consecutive tool call limit reached for tool 'shell_exec' (10/10). Agent must switch to a different tool or finalize with gathered evidence.
+2026-09-25 20:10:11,900 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-09-25 20:10:14,134 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-09-25 20:10:14,143 - execution - INFO - None
+2026-09-25 20:10:14,331 - httpx - INFO - HTTP Request: GET https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-09-25 20:10:14,331 - mcp.client.streamable_http - INFO - GET stream disconnected, reconnecting in 1000ms...
+2026-09-25 20:10:14,331 - httpx - INFO - HTTP Request: DELETE https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"

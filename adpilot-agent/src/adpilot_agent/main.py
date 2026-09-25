@@ -23,6 +23,7 @@ from .util import (
     get_agent,
     get_settings,
     list_tools,
+    log_execution_event,
     mcp_tool_session,
     setup_execution_logger,
 )
@@ -64,10 +65,18 @@ async def async_main():
 
     try:
         async with mcp_tool_session(
-            # extra_headers={AGENT_PHASE_HEADER: "shell_only"}, # use when you want only shell tool
+            extra_headers={AGENT_PHASE_HEADER: "shell_only"}, # use when you want only shell tool
             same_tool_streak_limit=settings.EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW,
             metrics=metrics,
         ) as tools:
+            tools_str = list_tools(tools)
+
+            log_execution_event(
+                event_type="tools_loaded",
+                message=f"Loaded {len(tools)} tools: {', '.join([getattr(t, 'name', str(t)) for t in tools])}",
+                tools=tools_str,
+            )
+
             agent = get_agent(tools=tools)
 
             messages = [
@@ -76,7 +85,7 @@ async def async_main():
                         dc_ip=settings.DC_IP,
                         network=settings.NETWORK,
                         ignored_hosts=str(settings.IGNORED_HOSTS),
-                        tools=list_tools(tools),
+                        tools=tools_str,
                     )
                 ),
                 HumanMessage("Start the penetration test as specified in the prompt."),
