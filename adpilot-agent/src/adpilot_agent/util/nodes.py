@@ -346,7 +346,7 @@ async def create_initial_plan(state: PentestState) -> dict[str, Any]:
         raise RuntimeError("Current phase is required to create initial plan.")
 
     async with mcp_tool_session(
-        extra_headers={AGENT_PHASE_HEADER: phase.value},
+        extra_headers={AGENT_PHASE_HEADER: "shell_only"},
         phase=phase.value,
         metrics=metrics,
     ) as tools:
@@ -474,10 +474,10 @@ async def exploit_node(state: PentestState) -> dict[str, Any]:
     record_exploit_node_run(metrics)
 
     async with mcp_tool_session(
-        tool_call_limit=settings.EXPLOIT_MAX_TOOL_CALLS,
-        same_tool_streak_limit=settings.EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW,
+        tool_call_limit=None, # TODO change to settings.EXPLOIT_MAX_TOOL_CALLS / settings.EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW is using tools
+        same_tool_streak_limit=None,
         limit_scope_label="ExploitNode",
-        extra_headers={AGENT_PHASE_HEADER: phase.value},
+        extra_headers={AGENT_PHASE_HEADER: "shell_only"},
         phase=phase.value,
         metrics=metrics,
     ) as tools:
@@ -487,8 +487,8 @@ async def exploit_node(state: PentestState) -> dict[str, Any]:
                     task=task,
                     tools=list_tools(tools),
                     max=3,
-                    tool_call_limit=settings.EXPLOIT_MAX_TOOL_CALLS,
-                    same_tool_streak_limit=settings.EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW,
+                    tool_call_limit="unbounded",# TODO change to settings.EXPLOIT_MAX_TOOL_CALLS / settings.EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW is using tools
+                    same_tool_streak_limit="unbounded",
                     dc_ip=settings.DC_IP,
                     network=settings.NETWORK,
                     ignored_hosts=settings.IGNORED_HOSTS_PROMPT,
@@ -746,7 +746,7 @@ async def final_report(state: PentestState) -> dict[str, Any]:
     )
 
     sanitized_model = re.sub(r"[^\w\-.]", "_", get_settings().MODEL_NAME)
-    base_dir = Path(__file__).resolve().parent.parent.parent
+    base_dir = Path(__file__).resolve().parent.parent.parent.parent
     report_path = (
         base_dir
         / "reports"

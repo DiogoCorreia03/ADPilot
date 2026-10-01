@@ -269,6 +269,7 @@ def _build_tool_interceptor(
             same_tool_streak_count = prospective_streak
 
         try:
+            logger.info(f"Calling tool '{request.name}' with args: {request.args}.")
             result = await handler(request)
         except Exception as error:
             log_execution_event(
