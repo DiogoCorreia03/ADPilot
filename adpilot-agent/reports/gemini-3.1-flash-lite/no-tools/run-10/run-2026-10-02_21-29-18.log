@@ -1,0 +1,493 @@
+2026-10-02 21:29:18,456 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:29:18,456 - mcp.client.streamable_http - INFO - Received session ID: 99e6184dbe654006b5c3b4b90fd5868c
+2026-10-02 21:29:18,457 - mcp.client.streamable_http - INFO - Negotiated protocol version: 2025-11-25
+2026-10-02 21:29:18,624 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 202 Accepted"
+2026-10-02 21:29:18,789 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:29:18,790 - execution - INFO - Loaded 1 tools: shell_exec
+2026-10-02 21:29:19,357 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:29:19,695 - google.auth._default - WARNING - No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+2026-10-02 21:29:20,948 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:30:50,536 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:30:50,538 - execution - INFO - None
+2026-10-02 21:30:50,542 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:30:51,592 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:30:52,638 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:30:52,640 - execution - INFO - None
+2026-10-02 21:30:52,645 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:30:53,619 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:30:53,801 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:30:53,803 - execution - INFO - None
+2026-10-02 21:30:53,807 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:30:54,805 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:30:55,510 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:30:55,512 - execution - INFO - None
+2026-10-02 21:30:55,518 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:30:56,529 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:30:58,274 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:30:58,277 - execution - INFO - None
+2026-10-02 21:30:58,283 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:30:59,402 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:30:59,619 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:30:59,621 - execution - INFO - None
+2026-10-02 21:30:59,627 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:00,727 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:00,893 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:00,895 - execution - INFO - None
+2026-10-02 21:31:00,898 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:01,924 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:05,049 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:05,052 - execution - INFO - None
+2026-10-02 21:31:05,060 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:06,174 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:07,019 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:07,020 - execution - INFO - None
+2026-10-02 21:31:07,024 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:08,028 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:09,415 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:09,418 - execution - INFO - None
+2026-10-02 21:31:09,424 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:10,530 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:11,123 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:11,125 - execution - INFO - None
+2026-10-02 21:31:11,131 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:12,194 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:12,487 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:12,489 - execution - INFO - None
+2026-10-02 21:31:12,494 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:13,481 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:16,676 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:16,677 - execution - INFO - None
+2026-10-02 21:31:16,680 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:17,742 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:17,939 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:17,941 - execution - INFO - None
+2026-10-02 21:31:17,945 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:19,039 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:20,956 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:20,957 - execution - INFO - None
+2026-10-02 21:31:20,961 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:21,843 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:22,052 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:22,054 - execution - INFO - None
+2026-10-02 21:31:22,059 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:22,995 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:24,209 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:24,212 - execution - INFO - None
+2026-10-02 21:31:24,219 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:25,239 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:28,380 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:28,382 - execution - INFO - None
+2026-10-02 21:31:28,387 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:31:29,348 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:31:29,781 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:31:29,817 - execution - INFO - None
+2026-10-02 21:31:29,822 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:06,734 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:07,416 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:07,418 - execution - INFO - None
+2026-10-02 21:32:07,423 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:08,872 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:09,044 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:09,046 - execution - INFO - None
+2026-10-02 21:32:09,050 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:10,594 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:11,043 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:11,081 - execution - INFO - None
+2026-10-02 21:32:11,085 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:12,149 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:12,600 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:12,602 - execution - INFO - None
+2026-10-02 21:32:12,607 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:13,924 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:14,173 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:14,175 - execution - INFO - None
+2026-10-02 21:32:14,180 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:15,852 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:16,037 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:16,039 - execution - INFO - None
+2026-10-02 21:32:16,045 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:17,933 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:18,130 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:18,167 - execution - INFO - None
+2026-10-02 21:32:18,173 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:33,070 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:33,337 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:33,373 - execution - INFO - None
+2026-10-02 21:32:33,383 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:35,243 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:35,472 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:35,474 - execution - INFO - None
+2026-10-02 21:32:35,483 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:36,940 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:37,143 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:37,180 - execution - INFO - None
+2026-10-02 21:32:37,189 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:38,325 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:38,527 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:38,564 - execution - INFO - None
+2026-10-02 21:32:38,569 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:40,089 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:40,313 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:40,315 - execution - INFO - None
+2026-10-02 21:32:40,321 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:41,717 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:41,908 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:41,910 - execution - INFO - None
+2026-10-02 21:32:41,916 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:43,780 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:44,000 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:44,001 - execution - INFO - None
+2026-10-02 21:32:44,006 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:45,771 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:45,971 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:46,008 - execution - INFO - None
+2026-10-02 21:32:46,014 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:48,236 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:48,469 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:48,470 - execution - INFO - None
+2026-10-02 21:32:48,585 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:50,407 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:50,813 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:50,849 - execution - INFO - None
+2026-10-02 21:32:50,854 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:52,784 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:32:53,019 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:32:53,055 - execution - INFO - None
+2026-10-02 21:32:53,061 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:32:55,195 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:33:51,236 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:33:51,309 - execution - INFO - None
+2026-10-02 21:33:51,316 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:33:53,697 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:33:55,550 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:33:55,551 - execution - INFO - None
+2026-10-02 21:33:55,557 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:33:57,982 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:33:59,949 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:33:59,950 - execution - INFO - None
+2026-10-02 21:33:59,956 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:01,679 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:34:02,809 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:34:02,810 - execution - INFO - None
+2026-10-02 21:34:02,816 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:04,477 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:34:04,710 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:34:04,711 - execution - INFO - None
+2026-10-02 21:34:04,716 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:06,470 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:34:10,012 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:34:10,085 - execution - INFO - None
+2026-10-02 21:34:10,091 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:12,401 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:34:15,974 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:34:16,010 - execution - INFO - None
+2026-10-02 21:34:16,016 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:19,427 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:34:20,551 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:34:20,553 - execution - INFO - None
+2026-10-02 21:34:20,563 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:22,226 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:34:22,486 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:34:22,487 - execution - INFO - None
+2026-10-02 21:34:22,493 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:24,078 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:34:24,316 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:34:24,317 - execution - INFO - None
+2026-10-02 21:34:24,323 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:26,024 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:34:26,631 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:34:26,632 - execution - INFO - None
+2026-10-02 21:34:26,638 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:28,652 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:34:30,661 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:34:30,663 - execution - INFO - None
+2026-10-02 21:34:30,672 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:34:32,299 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:23,654 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:23,656 - execution - INFO - None
+2026-10-02 21:35:23,668 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:25,657 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:28,115 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:28,117 - execution - INFO - None
+2026-10-02 21:35:28,125 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:29,580 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:30,473 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:30,475 - execution - INFO - None
+2026-10-02 21:35:30,481 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:33,036 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:33,996 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:33,998 - execution - INFO - None
+2026-10-02 21:35:34,007 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:35,991 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:36,831 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:36,833 - execution - INFO - None
+2026-10-02 21:35:36,842 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:38,482 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:39,330 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:39,332 - execution - INFO - None
+2026-10-02 21:35:39,339 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:41,133 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:41,984 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:41,985 - execution - INFO - None
+2026-10-02 21:35:41,992 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:43,682 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:45,867 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:45,868 - execution - INFO - None
+2026-10-02 21:35:45,875 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:47,694 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:48,633 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:48,635 - execution - INFO - None
+2026-10-02 21:35:48,644 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:50,518 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:51,263 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:51,265 - execution - INFO - None
+2026-10-02 21:35:51,274 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:52,705 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:53,558 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:53,559 - execution - INFO - None
+2026-10-02 21:35:53,567 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:55,472 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:55,720 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:55,721 - execution - INFO - None
+2026-10-02 21:35:55,730 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:57,650 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:57,881 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:57,882 - execution - INFO - None
+2026-10-02 21:35:57,890 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:35:59,580 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:35:59,797 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:35:59,798 - execution - INFO - None
+2026-10-02 21:35:59,804 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:36:01,229 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:36:01,419 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:36:01,420 - execution - INFO - None
+2026-10-02 21:36:01,427 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:36:02,882 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:36:03,104 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:36:03,106 - execution - INFO - None
+2026-10-02 21:36:03,113 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:39:44,579 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:39:44,842 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:39:44,845 - execution - INFO - None
+2026-10-02 21:39:44,857 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:39:46,931 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:39:47,330 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:39:47,367 - execution - INFO - None
+2026-10-02 21:39:47,380 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:40:36,660 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:40:36,891 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:40:36,894 - execution - INFO - None
+2026-10-02 21:40:36,906 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:40:41,912 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:40:42,262 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:40:42,264 - execution - INFO - None
+2026-10-02 21:40:42,278 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:40:44,406 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:40:44,706 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:40:44,708 - execution - INFO - None
+2026-10-02 21:40:44,722 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:40:51,964 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:40:52,179 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:40:52,181 - execution - INFO - None
+2026-10-02 21:40:52,194 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:40:53,819 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:40:54,046 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:40:54,049 - execution - INFO - None
+2026-10-02 21:40:54,062 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:40:56,814 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:40:59,413 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:40:59,415 - execution - INFO - None
+2026-10-02 21:40:59,430 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:01,511 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:02,001 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:02,004 - execution - INFO - None
+2026-10-02 21:41:02,019 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:03,676 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:05,982 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:05,985 - execution - INFO - None
+2026-10-02 21:41:05,999 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:08,403 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:10,566 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:10,568 - execution - INFO - None
+2026-10-02 21:41:10,584 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:12,905 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:14,525 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:14,528 - execution - INFO - None
+2026-10-02 21:41:14,543 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:16,801 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:18,854 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:18,855 - execution - INFO - None
+2026-10-02 21:41:18,869 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:21,391 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:22,196 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:22,199 - execution - INFO - None
+2026-10-02 21:41:22,214 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:23,617 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:25,258 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:25,260 - execution - INFO - None
+2026-10-02 21:41:25,273 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:31,025 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:32,832 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:32,835 - execution - INFO - None
+2026-10-02 21:41:32,849 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:35,989 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:37,309 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:37,312 - execution - INFO - None
+2026-10-02 21:41:37,330 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:39,178 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:41,684 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:41,686 - execution - INFO - None
+2026-10-02 21:41:41,701 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:43,437 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:45,517 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:45,518 - execution - INFO - None
+2026-10-02 21:41:45,530 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:49,194 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:41:50,858 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:41:50,860 - execution - INFO - None
+2026-10-02 21:41:50,871 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:41:54,805 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:43:40,150 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:43:40,152 - execution - INFO - None
+2026-10-02 21:43:40,169 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:43:42,942 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:43:43,136 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:43:43,138 - execution - INFO - None
+2026-10-02 21:43:43,153 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:43:44,959 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:43:46,280 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:43:46,283 - execution - INFO - None
+2026-10-02 21:43:46,299 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:43:51,292 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:43:52,472 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:43:52,475 - execution - INFO - None
+2026-10-02 21:43:52,490 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:43:54,796 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:43:55,968 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:43:55,970 - execution - INFO - None
+2026-10-02 21:43:55,986 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:43:57,683 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:43:58,320 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:43:58,322 - execution - INFO - None
+2026-10-02 21:43:58,338 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:43:59,981 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:01,153 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:01,155 - execution - INFO - None
+2026-10-02 21:44:01,173 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:03,206 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:04,384 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:04,387 - execution - INFO - None
+2026-10-02 21:44:04,407 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:07,806 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:08,991 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:08,993 - execution - INFO - None
+2026-10-02 21:44:09,010 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:10,836 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:12,020 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:12,023 - execution - INFO - None
+2026-10-02 21:44:12,040 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:15,229 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:16,518 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:16,520 - execution - INFO - None
+2026-10-02 21:44:16,536 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:23,642 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:24,633 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:24,635 - execution - INFO - None
+2026-10-02 21:44:24,648 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:26,875 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:27,831 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:27,832 - execution - INFO - None
+2026-10-02 21:44:27,845 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:29,582 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:31,225 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:31,227 - execution - INFO - None
+2026-10-02 21:44:31,239 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:32,876 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:33,046 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:33,047 - execution - INFO - None
+2026-10-02 21:44:33,059 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:34,465 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:34,633 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:34,634 - execution - INFO - None
+2026-10-02 21:44:34,646 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:36,253 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:36,434 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:36,437 - execution - INFO - None
+2026-10-02 21:44:36,455 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:37,894 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:38,086 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:38,088 - execution - INFO - None
+2026-10-02 21:44:38,099 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:40,028 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:40,764 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:40,766 - execution - INFO - None
+2026-10-02 21:44:40,779 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:42,683 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:43,070 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:43,072 - execution - INFO - None
+2026-10-02 21:44:43,084 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:44,934 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:45,407 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:45,409 - execution - INFO - None
+2026-10-02 21:44:45,420 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:49,324 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:50,250 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:50,252 - execution - INFO - None
+2026-10-02 21:44:50,264 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:52,960 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:44:53,820 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:44:53,822 - execution - INFO - None
+2026-10-02 21:44:53,834 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:44:55,744 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:08,172 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:08,174 - execution - INFO - None
+2026-10-02 21:45:08,192 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:09,719 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:09,944 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:09,982 - execution - INFO - None
+2026-10-02 21:45:10,000 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:11,918 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:12,829 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:12,831 - execution - INFO - None
+2026-10-02 21:45:12,844 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:14,847 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:16,106 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:16,108 - execution - INFO - None
+2026-10-02 21:45:16,126 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:18,020 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:18,869 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:18,872 - execution - INFO - None
+2026-10-02 21:45:18,894 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:20,962 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:22,852 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:22,855 - execution - INFO - None
+2026-10-02 21:45:22,874 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:24,622 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:24,977 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:24,980 - execution - INFO - None
+2026-10-02 21:45:24,999 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:27,100 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:28,178 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:28,181 - execution - INFO - None
+2026-10-02 21:45:28,200 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:30,370 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:31,231 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:31,233 - execution - INFO - None
+2026-10-02 21:45:31,247 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:33,312 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:34,075 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:34,077 - execution - INFO - None
+2026-10-02 21:45:34,095 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:36,123 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:37,120 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:37,122 - execution - INFO - None
+2026-10-02 21:45:37,141 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:39,136 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:39,322 - httpx - INFO - HTTP Request: POST https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:39,325 - execution - INFO - None
+2026-10-02 21:45:39,345 - langchain_google_genai._function_utils - WARNING - Key 'additionalProperties' is not supported in schema, ignoring
+2026-10-02 21:45:42,630 - httpx - INFO - HTTP Request: POST https://aiplatform.googleapis.com/v1beta1/projects/project-51a3ca05-d89a-427d-b93/locations/global/publishers/google/models/gemini-3.1-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-10-02 21:45:42,672 - execution - INFO - None
+2026-10-02 21:45:42,840 - httpx - INFO - HTTP Request: GET https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"
+2026-10-02 21:45:42,841 - mcp.client.streamable_http - INFO - GET stream disconnected, reconnecting in 1000ms...
+2026-10-02 21:45:42,842 - httpx - INFO - HTTP Request: DELETE https://unshining-ebonie-redistillable.ngrok-free.dev/mcp "HTTP/1.1 200 OK"

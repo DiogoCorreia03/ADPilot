@@ -66,7 +66,7 @@ async def async_main():
     try:
         async with mcp_tool_session(
             extra_headers={AGENT_PHASE_HEADER: "shell_only"}, # use when you want only shell tool
-            same_tool_streak_limit=settings.EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW,
+            same_tool_streak_limit=None, # TODO change to settings.EXPLOIT_MAX_SAME_TOOL_CALLS_IN_A_ROW if using tools
             metrics=metrics,
         ) as tools:
             tools_str = list_tools(tools)
