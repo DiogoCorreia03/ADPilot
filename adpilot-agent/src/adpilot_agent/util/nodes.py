@@ -625,7 +625,7 @@ async def final_report(state: PentestState) -> dict[str, Any]:
     )
 
     sanitized_model = re.sub(r"[^\w\-.]", "_", get_settings().MODEL_NAME)
-    base_dir = Path(__file__).resolve().parent.parent.parent
+    base_dir = Path(__file__).resolve().parent.parent.parent.parent
     report_path = (
         base_dir
         / "reports"
